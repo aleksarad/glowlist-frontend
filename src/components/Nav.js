@@ -16,7 +16,10 @@ export default function Nav({ showModal }) {
                     <Link to='/feed'>feed</Link>
                 </li>
                 <li>
-                <button onClick={() => showModal(true)}>
+                    <Link to='/new'>new</Link>
+                </li>
+                <li>
+                <button onClick={() => showModal()}>
                     Launch vertically centered modal
                 </button>
                 </li>

@@ -26,6 +26,7 @@ export default function SignUp(props) {
           </p>
         </Modal.Body>
         <Modal.Footer>
+            <button onClick={props.onHide}>close</button>
         </Modal.Footer>
       </Modal>
     )

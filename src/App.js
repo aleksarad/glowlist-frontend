@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import Nav from './components/Nav'
 import SignUp from './components/SignUp'
 import Profile from './components/Profile'
 import LookContainer from './components/LookContainer'
+import LookForm from './components/LookForm'
 // import './App.css';
 
 function App() {
-    const [modalShow, setModalShow] = React.useState(false);
+    const [modalShow, setModalShow] = useState(false);
+    const [currentUser, setCurrentUser] = useState(1)
 
-    const showModal = (arg) => {
-        setModalShow(arg)
+    const [looks, setLooks] = useState([])
+
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/users/${currentUser}`)
+        .then(r => r.json())
+        .then(user => {
+            // console.log(user.looks)
+            setLooks(user.looks)
+        })
+    }, 
+    []);
+
+    const showModal = () => {
+        setModalShow(true)
     }
 
-    return ( <> 
+    return ( <div> 
     <main>
     <BrowserRouter>
             <Nav showModal={showModal}/> 
@@ -33,8 +48,15 @@ function App() {
                 <Profile/>
             )}/>
             <Route
+                path="/new"
+                render={() => (
+                <LookForm/>
+            )}/>
+            <Route
                 path="/feed"
-                render={() => ( <> <LookContainer/> <h1> new canvas modal </h1> </>)} />
+                render={() => ( <> <LookContainer looks={looks}/> 
+                {/* <LookForm/> */}
+                 </>)} />
             <Route
                 path="/login"
                 render={() => (
@@ -43,7 +65,7 @@ function App() {
 
     </BrowserRouter>
     </main>
-    </>);
+    </div>);
 }
 
 export default App;
