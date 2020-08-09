@@ -50,11 +50,11 @@ function App() {
             <Route
                 path="/new"
                 render={() => (
-                <LookForm/>
+                <LookForm setLooks={setLooks}/>
             )}/>
             <Route
                 path="/feed"
-                render={() => ( <> <LookContainer looks={looks}/> 
+                render={() => ( <> <LookContainer looks={looks} setLooks={setLooks}/> 
                 {/* <LookForm/> */}
                  </>)} />
             <Route

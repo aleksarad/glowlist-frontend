@@ -1,52 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { fabric } from "fabric";
+import CanvasDraw from "react-canvas-draw";
 
-// export default function LookCard({ look }) {
-//     useEffect(() => {
-//         const disabledCanvas = new fabric.Canvas("card-canvas")
-//         disabledCanvas.loadFromJSON(look.sketch)
-//     }, 
-//     []);
+export default function LookCard({ look, setLooks }) {
+    useEffect(() => {
+    }, 
+    []);
 
-//     return (
-//         <div>
-//             <p>{look.name}</p>
-//             <p>{look.description}</p>
-//             <canvas id="card-canvas" width="500" height="600"></canvas>
-//         </div>
-//     )
-// }
+    const  [width, setWidth] = useState(400);
+    const  [height, setHeight] = useState(400);
 
-export default class LookCard extends React.Component {
-    componentDidMount() {
-        const disabledCanvas = new fabric.Canvas(`${this.props.look.id}`, {
-            isDrawingMode: false,
-            selection: false
+    const deleteLook = (e) => {
+        e.preventDefault()
+        fetch(`http://localhost:3000/looks/${look.id}`, {
+          method: 'DELETE'
         })
-        const json = this.props.look.sketch
-        
-        this.loadCanvas(json, disabledCanvas)
+        .then(r => r.json())
+        .then(setLooks(prevLooks => prevLooks.filter(l => l.id !== look.id))) 
     }
 
-            
-    loadCanvas = (json, canvas) => {
-
-        // parse the data into the canvas
-        canvas.loadFromJSON(json);
-      
-        // re-render the canvas
-        canvas.renderAll();
-      }
-
-    render() {
-        // console.log(JSON.stringify(this.props.look.sketch))
-        const { look } = this.props
-        return (
-            <div>
-                <p>{look.name}</p>
-                <p>{look.description}</p>
-                <canvas width="500" height="600" id={look.id}></canvas>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <p>{look.name}</p>
+            <p>{look.description}</p>
+            <CanvasDraw
+                saveData={JSON.stringify(look.sketch)}
+                disabled
+                hideGrid
+                immediateLoading={true}
+                imgSrc={look.background_image}
+                canvasHeight={height}
+                canvasWidth={width}
+                backgroundColor={look.background_color}
+            />
+            <button onClick={deleteLook}>delete look</button>
+            <button>edit</button>
+        </div>
+    )
 }
+
