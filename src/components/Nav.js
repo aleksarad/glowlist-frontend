@@ -16,7 +16,7 @@ export default function Nav({ showModal }) {
                     <Link to='/feed'>feed</Link>
                 </li>
                 <li>
-                    <Link to='/new'>new</Link>
+                    <Link to='/look'>look</Link>
                 </li>
                 <li>
                 <button onClick={() => showModal()}>

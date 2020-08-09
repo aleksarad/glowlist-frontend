@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CanvasDraw from "react-canvas-draw";
 
-export default function LookCard({ look, setLooks }) {
+export default function LookCard({ look, setLooks, handleEditing, history }) {
     useEffect(() => {
     }, 
     []);
@@ -33,7 +33,10 @@ export default function LookCard({ look, setLooks }) {
                 backgroundColor={look.background_color}
             />
             <button onClick={deleteLook}>delete look</button>
-            <button>edit</button>
+            <button onClick={() => {
+                handleEditing(look)
+                history.push('/look')
+                }}>edit</button>
         </div>
     )
 }

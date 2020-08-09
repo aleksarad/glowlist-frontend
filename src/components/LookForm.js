@@ -19,7 +19,28 @@ export default class LookForm extends React.Component {
     }
 
     componentDidMount() {
+        console.log("mounted lookform")
+        const editing = this.props.editing
+        if (editing !== null) {
+            console.log("editing!")
 
+            this.setState({
+                sketch: JSON.stringify(this.saveableCanvas.getSaveData()),
+                name: editing.name,
+                description: editing.description,
+                colors: editing.colors,
+                user_id: editing.user_id,
+                background_image: editing.background_image,
+                //this should come from users BC
+                background_color: editing.background_color
+            })
+
+        }
+        console.log("new")
+    }
+
+    componentWillUnmount() {
+        this.props.setEditing(null)
     }
 
     handleInput = (e) => {
@@ -30,23 +51,39 @@ export default class LookForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log(this.state)
-
-        fetch('http://localhost:3000/looks', {
-            method: 'POST',
-            headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-          },
-          body: JSON.stringify(this.state)
-        })
-        .then(r => r.json())
-        .then(newLook => {
-            console.log(newLook)
-            this.props.setLooks(prevLooks => [newLook, ...prevLooks])
-        })
+        const editing = this.props.editing
+        if (editing !== null) {
+            console.log("editing")
+              fetch(`http://localhost:3000/looks/${editing.id}`, {
+                method: 'PATCH',
+                headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+              },
+              body: JSON.stringify(this.state)
+              })
+              .then(r => r.json())
+              .then(edit => this.props.updateLookState(edit))
+        }
+        else {
+            console.log("new")
+            fetch('http://localhost:3000/looks', {
+                method: 'POST',
+                headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+              },
+              body: JSON.stringify(this.state)
+            })
+            .then(r => r.json())
+            .then(newLook => {
+                console.log(newLook)
+                this.props.setLooks(prevLooks => [newLook, ...prevLooks])
+            })
+        }
 
         this.saveableCanvas.clear()
+        this.props.history.push('/feed')
     }
 
     render() {
@@ -60,12 +97,14 @@ export default class LookForm extends React.Component {
                 hideGrid
                 ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
                 brushColor={this.state.color}
-                brushRadius={this.state.brushRadius}
-                lazyRadius={this.state.lazyRadius}
+                brushRadius={5}
+                lazyRadius={0}
                 canvasWidth={this.state.width}
                 canvasHeight={this.state.height}
                 imgSrc={this.state.background_image}
                 backgroundColor={this.state.background_color}
+                saveData={this.props.editing !== null ? JSON.stringify(this.props.editing.sketch) : ''}
+                immediateLoading={true}
             />
 
             <div>

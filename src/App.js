@@ -10,7 +10,7 @@ import LookForm from './components/LookForm'
 function App() {
     const [modalShow, setModalShow] = useState(false);
     const [currentUser, setCurrentUser] = useState(1)
-
+    const [editing, setEditing] = useState(null)
     const [looks, setLooks] = useState([])
 
 
@@ -21,14 +21,29 @@ function App() {
             // console.log(user.looks)
             setLooks(user.looks)
         })
-    }, 
-    []);
+    }, []);
 
     const showModal = () => {
         setModalShow(true)
     }
 
-    return ( <div> 
+    const handleEditing = (look) => {
+        setEditing(look)
+    }
+
+    const updateLookState = (editedLook) => {
+        const updatedLooks = looks.map(look => {
+            if (look.id === editedLook.id) {
+              return editedLook
+            } else {
+              return look
+            }
+          }) 
+          setLooks(updatedLooks)
+    }
+
+    return ( 
+    <div> 
     <main>
     <BrowserRouter>
             <Nav showModal={showModal}/> 
@@ -48,13 +63,13 @@ function App() {
                 <Profile/>
             )}/>
             <Route
-                path="/new"
-                render={() => (
-                <LookForm setLooks={setLooks}/>
+                path="/look"
+                render={(routeProps) => (
+                <LookForm {...routeProps} updateLookState={updateLookState} setLooks={setLooks} editing={editing} setEditing={setEditing}/>
             )}/>
             <Route
                 path="/feed"
-                render={() => ( <> <LookContainer looks={looks} setLooks={setLooks}/> 
+                render={(routeProps) => ( <> <LookContainer  routeProps={routeProps} looks={looks} setLooks={setLooks} handleEditing={handleEditing}/> 
                 {/* <LookForm/> */}
                  </>)} />
             <Route
