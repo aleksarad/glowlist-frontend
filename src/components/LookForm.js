@@ -7,7 +7,7 @@ export default class LookForm extends React.Component {
         name: '',
         description: '',
         colors: ["pink", "purple", "green"],
-        user_id: 1,
+        user_id: this.props.currentUser.id,
         color: "#00a6ff",
         width: 600,
         height: 700,
@@ -51,14 +51,18 @@ export default class LookForm extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        const token = localStorage.getItem("token")
         const editing = this.props.editing
+
+        
         if (editing !== null) {
             console.log("editing")
               fetch(`http://localhost:3000/looks/${editing.id}`, {
                 method: 'PATCH',
                 headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
               },
               body: JSON.stringify(this.state)
               })
@@ -72,6 +76,7 @@ export default class LookForm extends React.Component {
                 headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
+                "Authorization": `Bearer ${token}`
               },
               body: JSON.stringify(this.state)
             })

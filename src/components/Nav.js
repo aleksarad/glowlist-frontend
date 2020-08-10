@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 // import Button from 'react-bootstrap/Button';
 
-export default function Nav({ showModal }) {
+export default function Nav({ showSignUpModal, showLoginModal }) {
     return (
         <nav>
             <ul>
@@ -19,8 +19,13 @@ export default function Nav({ showModal }) {
                     <Link to='/look'>look</Link>
                 </li>
                 <li>
-                <button onClick={() => showModal()}>
-                    Launch vertically centered modal
+                <button onClick={() => showSignUpModal()}>
+                    Sign Up
+                </button>
+                </li>
+                <li>
+                <button onClick={() => showLoginModal()}>
+                   Log In
                 </button>
                 </li>
             </ul>

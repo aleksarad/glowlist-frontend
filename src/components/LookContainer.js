@@ -1,7 +1,9 @@
 import React from 'react';
 import LookCard from './LookCard'
+import { useState } from 'react';
 
 export default function LookContainer({looks, setLooks, handleEditing, routeProps}) {
+
 
     const lookCards = looks.map(look => <LookCard key={look.id} {...routeProps} look={look} setLooks={setLooks} handleEditing={handleEditing}/>)
 

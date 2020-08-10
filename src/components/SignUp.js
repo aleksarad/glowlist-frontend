@@ -1,9 +1,43 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
 export default function SignUp(props) {
 
-    useEffect(() => console.log("mounted"))
+    // useEffect(() => console.log("mounted"))
+
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [facechart, setFaceChart] = useState("124")
+    const [background_color, setBackgroundColor] = useState("234")
+
+    const handleUsernameChange = (evt) => {
+        setUsername(evt.target.value)
+    }
+
+    const handlePasswordChange = (evt) => {
+        setPassword(evt.target.value)
+    }
+
+    const handleSubmit = (evt) => {
+      evt.preventDefault()
+      fetch(`http://localhost:3000/users`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+          },
+          body: JSON.stringify({
+              username,
+              password,
+              background_color,
+              facechart
+          })
+      })
+      .then(resp => resp.json())
+      .then(console.log)
+      setUsername("")
+      setPassword("")
+  }
 
     return (
         <Modal
@@ -18,12 +52,21 @@ export default function SignUp(props) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h4>Centered Modal</h4>
-          <p>
-            Cras mattis consectetur purus sit amet fermentum. Cras justo odio,
-            dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac
-            consectetur ac, vestibulum at eros.
-          </p>
+        <div>
+            <h1>Sign Up</h1>
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>Username</label>
+                    <input value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
+                </div>
+                <div>
+                    <label>Password</label>
+                    <input value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
+                </div>
+                
+                <button type="submit">Submit</button>
+            </form>
+        </div>
         </Modal.Body>
         <Modal.Footer>
             <button onClick={props.onHide}>close</button>
