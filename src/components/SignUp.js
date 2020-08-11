@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-export default function SignUp(props) {
+export default function SignUp({ history, show, onHide, handleLogin }) {
 
     // useEffect(() => console.log("mounted"))
 
@@ -34,14 +34,25 @@ export default function SignUp(props) {
           })
       })
       .then(resp => resp.json())
-      .then(console.log)
+      .then(data => {
+        if(data.token) {
+            localStorage.setItem("token", data.token)
+            handleLogin(data.user)
+            onHide()
+            history.push('/feed')
+        }
+        else {
+            console.log(data)
+        }
+    })
       setUsername("")
       setPassword("")
   }
 
     return (
         <Modal
-        {...props}
+        show={show}
+        onHide={onHide}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -68,9 +79,6 @@ export default function SignUp(props) {
             </form>
         </div>
         </Modal.Body>
-        <Modal.Footer>
-            <button onClick={props.onHide}>close</button>
-        </Modal.Footer>
       </Modal>
     )
 }

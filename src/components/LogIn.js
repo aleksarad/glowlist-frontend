@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-export default function Login({history, show, onHide, handleLogin}) {
+export default function Login({ history, show, onHide, handleLogin }) {
 
     useEffect(() => console.log("mounted"))
 
@@ -53,7 +53,7 @@ export default function Login({history, show, onHide, handleLogin}) {
         <Modal
         show={show}
         onHide={onHide}
-        size="lg"
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >

@@ -11,8 +11,13 @@ export default function LookCard({ look, setLooks, handleEditing, history }) {
 
     const deleteLook = (e) => {
         e.preventDefault()
+        const token = localStorage.getItem("token")
+        
         fetch(`http://localhost:3000/looks/${look.id}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          headers: {
+            "Authorization": `Bearer ${token}`
+          },
         })
         .then(r => r.json())
         .then(setLooks(prevLooks => prevLooks.filter(l => l.id !== look.id))) 

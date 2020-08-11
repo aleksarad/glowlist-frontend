@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Nav from './components/Nav'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
 import Profile from './components/Profile'
 import LookContainer from './components/LookContainer'
 import LookForm from './components/LookForm'
-// import './App.css';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
-function App() {
+function App(props) {
     const [signUpShow, setSignUpModal] = useState(false);
     const [loginShow, setLoginModal] = useState(false);
     const [currentUser, setCurrentUser] = useState(null)
@@ -18,26 +18,44 @@ function App() {
 
     useEffect(() => {
         console.log("mounted app.js")
-        // fetch(`http://localhost:3000/users/${currentUser}`)
-        // .then(r => r.json())
-        // .then(user => {
-        //     // console.log(user.looks)
-        //     setLooks(user.looks)
-        // })
+        const token = localStorage.getItem("token")
+        // let history = useHistory();
+
+        if (token) {
+          fetch(`http://localhost:3000/auto_login`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+          .then(resp => resp.json())
+          .then(data => {
+              setCurrentUser(data)
+              fetchLooks(token, data)
+            })
+            // history.push('/feed')
+        }
     }, []);
 
     const handleLogin = (user) => {
         setCurrentUser(user)
         const token = localStorage.getItem("token")
+        fetchLooks(token, user)
+    }
 
+    const logout = () => {
+        setCurrentUser(null)
+        localStorage.removeItem("token")
+    }
+
+    //reused in handle login and autologin
+    const fetchLooks = (token, user) => {
         fetch(`http://localhost:3000/users/${user.id}`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
-          })
+        })
         .then(r => r.json())
         .then(user => {
-            // console.log(user.looks)
             setLooks(user.looks)
         })
     }
@@ -67,21 +85,22 @@ function App() {
 
     return ( 
     <div> 
-        {console.log("loooks", looks)}
-        {/* {console.log(localStorage.getItem('token'))} */}
     <main>
     <BrowserRouter>
-            <Nav showSignUpModal={showSignUpModal} showLoginModal={showLoginModal}/> 
+            <Nav logout={logout} showSignUpModal={showSignUpModal} showLoginModal={showLoginModal} currentUser={currentUser}/> 
             <Route
                 exact
                 path="/"
                 render={(routeProps) => (
-                <>
+                <>{ currentUser !== null ? <Redirect push to="/feed"/> :
+                    <>
                     <h1>HOME/WELCOME</h1>
                     <SignUp {...routeProps} show={signUpShow}
-                    onHide={() => setSignUpModal(false)}/>
+                    onHide={() => setSignUpModal(false)} handleLogin={handleLogin}/>
                     <LogIn {...routeProps} show={loginShow}
                     onHide={() => setLoginModal(false)} handleLogin={handleLogin}/>
+                    </>
+                }
                 </>
             )}/>
             <Route
