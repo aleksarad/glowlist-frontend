@@ -3,12 +3,11 @@ import Modal from 'react-bootstrap/Modal';
 
 export default function SignUp({ history, show, onHide, handleLogin }) {
 
-    // useEffect(() => console.log("mounted"))
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [facechart, setFaceChart] = useState("124")
-    const [background_color, setBackgroundColor] = useState("234")
+    const [background_color, setBackgroundColor] = useState("#9c5941")
 
     const handleUsernameChange = (evt) => {
         setUsername(evt.target.value)
@@ -45,38 +44,43 @@ export default function SignUp({ history, show, onHide, handleLogin }) {
             console.log(data)
         }
     })
-      setUsername("")
-      setPassword("")
   }
 
     return (
         <Modal
         show={show}
         onHide={onHide}
-        size="lg"
+        scrollable={true}
+        size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
-          </Modal.Title>
+        <Modal.Header closeButton className="">
+          {/* <Modal.Title id="contained-modal-title-vcenter" className="">
+            create an account
+          </Modal.Title> */}
         </Modal.Header>
         <Modal.Body>
-        <div>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username</label>
-                    <input value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
+        <div>   
+
+                <h1 style={{textAlign: 'center'}}>create an account</h1>
+                <input className="underline-input" value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
+                <br/>
+                <input className="underline-input"  value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
+                <br/>
+
+                <div id="color-preference-container">
+                    <div>
+                        <p>select skin tone</p>
+                        <p>this can be updated in your profile later</p>
+                    </div>
+                    <input type="color" value={background_color} onChange={(e) => setBackgroundColor(e.target.value)} className="align-middle"></input>
                 </div>
-                <div>
-                    <label>Password</label>
-                    <input value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
-                </div>
+
                 
-                <button type="submit">Submit</button>
-            </form>
+        </div>
+        <div className="form-footer">
+             <button type="submit" onClick={handleSubmit}>Submit</button>
         </div>
         </Modal.Body>
       </Modal>

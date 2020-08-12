@@ -1,7 +1,9 @@
 import React from 'react';
 import CanvasDraw from "react-canvas-draw";
-import {ChromePicker, BlockPicker} from 'react-color';
+import {ChromePicker, BlockPicker, HuePicker, AlphaPicker} from 'react-color';
 import reactCSS from 'reactcss'
+import faceChart from '../images/facechart1.png'
+
 
 export default class LookForm extends React.Component {
     state = {
@@ -11,15 +13,15 @@ export default class LookForm extends React.Component {
         colors: [
             "pink", "purple", "green"
         ],
-        // user_id: this.props.currentUser.id,
-        color: "rgba(155,12,60,0.3)",
-        width: 500,
-        height: 500,
+        user_id: this.props.currentUser.id,
+        color: "rgba(255,51,153,1)",
+        width: 550,
+        height: 550,
         brushRadius: 5,
         lazyRadius: 0,
-        background_image: "https://img.benefitcosmetics.com/image/upload/f_auto,q_auto,fl_lossy/origin_files/us/en/sites/us/files/Facechart_728x700.png",
+        background_image: faceChart,
         //this should come from users BC
-        background_color: "#ffe0d4",
+        background_color: this.props.currentUser.background_color,
         displayColorPicker: false
     }
 
@@ -34,7 +36,6 @@ export default class LookForm extends React.Component {
                 colors: editing.colors,
                 user_id: editing.user_id,
                 background_image: editing.background_image,
-                //this should come from users BC
                 background_color: editing.background_color
             })
 
@@ -111,99 +112,87 @@ export default class LookForm extends React.Component {
     }
 
     render() {
-        const styles = reactCSS({
-            'default': {
-              color: {
-                width: '36px',
-                height: '14px',
-                borderRadius: '2px',
-                background:`${this.state.color}`,
-              },
-              swatch: {
-                padding: '5px',
-                background: '#fff',
-                borderRadius: '1px',
-                boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
-                display: 'inline-block',
-                cursor: 'pointer',
-              },
-              popover: {
-                position: 'absolute',
-                zIndex: '2',
-              },
-              cover: {
-                position: 'fixed',
-                top: '0px',
-                right: '0px',
-                bottom: '0px',
-                left: '0px',
-              },
-            },
-        });
-
         return (
-            <div>
-            <h1>Look</h1>
+            <div id="look-form-container">
+                <div id="look-form">
+                <input
+                    className="underline-input top-input"
+                    type="text"
+                    value={this.state.name}
+                    onChange={this.handleInput}
+                    name="name"
+                    placeholder="look name"></input>
+                    <br/>
+                <textarea
+                    className="description top-input"
+                    value={this.state.description}
+                    onChange={this.handleInput}
+                    name="description"
+                    placeholder="description"></textarea>
+                <br/>
+                <p style={{textAlign: 'left'}} className="sketch-label">sketch</p>
 
-            <input
-                type="text"
-                value={this.state.name}
-                onChange={this.handleInput}
-                name="name"
-                placeholder="look name"></input>
-            <input
-                type="text"
-                value={this.state.description}
-                onChange={this.handleInput}
-                name="description"
-                placeholder="description"></input>
+                <div id="sketch-container">
+                    <div id="clear-undo-container">
+                        <button id="clear" onClick={() => this.saveableCanvas.clear()}>
+                        <svg viewBox="0 0 16 16" class="bi bi-x" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                        </svg>
+                        </button>
+                        <button id="undo" onClick={() => this.saveableCanvas.undo()}>
+                        <svg viewBox="0 0 16 16" class="bi bi-arrow-counterclockwise" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.83 6.706a5 5 0 0 0-7.103-3.16.5.5 0 1 1-.454-.892A6 6 0 1 1 2.545 5.5a.5.5 0 1 1 .91.417 5 5 0 1 0 9.375.789z"/>
+                            <path fill-rule="evenodd" d="M7.854.146a.5.5 0 0 0-.708 0l-2.5 2.5a.5.5 0 0 0 0 .708l2.5 2.5a.5.5 0 1 0 .708-.708L5.707 3 7.854.854a.5.5 0 0 0 0-.708z"/>
+                        </svg>
+                        </button>
+                    </div>
 
-            <button className="button" onClick={() => this.saveableCanvas.clear()}>
-                clear
-            </button>
-            <button className="button undo" onClick={() => this.saveableCanvas.undo()}>
-                undo
-            </button>
+                    <CanvasDraw
+                        className="form-canvas-container"
+                        onChange={() => {
+                        this.setState({
+                            sketch: JSON.parse(this.saveableCanvas.getSaveData())
+                        })
+                    }}
+                        hideGrid
+                        ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
+                        brushColor={this.state.color}
+                        brushRadius={this.state.brushRadius}
+                        lazyRadius={this.state.lazyRadius}
+                        canvasWidth={this.state.width}
+                        canvasHeight={this.state.height}
+                        imgSrc={this.state.background_image}
+                        backgroundColor={this.state.background_color}
+                        saveData={this.props.editing !== null
+                        ? JSON.stringify(this.props.editing.sketch)
+                        : ''}
+                        immediateLoading={true}/>
 
-            <CanvasDraw
-                onChange={() => {
-                this.setState({
-                    sketch: JSON.parse(this.saveableCanvas.getSaveData())
-                })
-            }}
-                hideGrid
-                ref={canvasDraw => (this.saveableCanvas = canvasDraw)}
-                brushColor={this.state.color}
-                brushRadius={this.state.brushRadius}
-                lazyRadius={this.state.lazyRadius}
-                canvasWidth={this.state.width}
-                canvasHeight={this.state.height}
-                imgSrc={this.state.background_image}
-                backgroundColor={this.state.background_color}
-                saveData={this.props.editing !== null
-                ? JSON.stringify(this.props.editing.sketch)
-                : ''}
-                immediateLoading={true}/>
+                    <label>brush:</label>
+                    <input
+                        className="underline-input brush-input"
+                        type="number"
+                        value={this.state.brushRadius}
+                        onChange={e => this.setState({
+                        brushRadius: parseInt(e.target.value, 10)
+                    })}/>
 
-            <label>brush:</label>
-            <input
-                type="number"
-                value={this.state.brushRadius}
-                onChange={e => this.setState({
-                brushRadius: parseInt(e.target.value, 10)
-            })}/>
+                    {/* <div style={ styles.swatch } className="align-middle" onClick={ this.handleClick }>
+                        <div style={ styles.color }/>
+                    </div>
 
-            <div style={ styles.swatch } onClick={ this.handleClick }>
-                <div style={ styles.color } />
-            </div>
-                { this.state.displayColorPicker ? <div style={ styles.popover }>
-            <div style={ styles.cover } onClick={ this.handleClose }/>
-                <ChromePicker color={ this.state.color } onChange={(color) => this.handleColorChange(color.rgb)} />
-             </div> : null }
-
-
-            <button onClick={this.handleSubmit}>submit</button>
-        </div> 
+                    { this.state.displayColorPicker ? <div style={ styles.popover }>
+                    <div style={ styles.cover } onClick={ this.handleClose }/>
+                        <ChromePicker color={ this.state.color } onChange={(color) => this.handleColorChange(color.rgb)} />
+                    </div> : null } */}
+                    <HuePicker className="color-picker" color={this.state.color} onChange={(color) => this.handleColorChange(color.rgb)} />
+                    <AlphaPicker className="color-picker opacity" color={this.state.color} onChange={(color) => this.handleColorChange(color.rgb)} />
+                </div>
+                <br/>
+                <button onClick={this.handleSubmit}>submit</button>
+                </div>
+            </div> 
         )
     }
 }

@@ -58,26 +58,25 @@ export default function Login({ history, show, onHide, handleLogin }) {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+          {/* <Modal.Title id="contained-modal-title-vcenter">
             Login
-          </Modal.Title>
+          </Modal.Title> */}
         </Modal.Header>
         <Modal.Body>
-                    <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Username</label>
-                    <input value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
-                </div>
-                <button type="submit">Submit</button>
-            </form>
+        <div>   
+
+                <h1 style={{textAlign: 'center'}}>log in</h1>
+                <input className="underline-input" value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
+                <br/>
+                <input className="underline-input"  value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
+                <br/>
+
+                
+        </div>
+        <div className="form-footer">
+             <button type="submit" onClick={handleSubmit}>Submit</button>
+        </div>
         </Modal.Body>
-        {/* <Modal.Footer>
-            <button onClick={props.onHide}>close</button>
-        </Modal.Footer> */}
       </Modal>
     )
 }

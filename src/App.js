@@ -6,9 +6,9 @@ import LogIn from './components/LogIn'
 import Profile from './components/Profile'
 import LookContainer from './components/LookContainer'
 import LookForm from './components/LookForm'
-import { propTypes } from 'react-bootstrap/esm/Image';
+import HomePage from './components/HomePage'
 
-function App(props) {
+function App() {
     const [signUpShow, setSignUpModal] = useState(false);
     const [loginShow, setLoginModal] = useState(false);
     const [currentUser, setCurrentUser] = useState(null)
@@ -19,7 +19,7 @@ function App(props) {
     useEffect(() => {
         console.log("mounted app.js")
         const token = localStorage.getItem("token")
-        // let history = useHistory();
+
 
         if (token) {
           fetch(`http://localhost:3000/auto_login`, {
@@ -32,7 +32,6 @@ function App(props) {
               setCurrentUser(data)
               fetchLooks(token, data)
             })
-            // history.push('/feed')
         }
     }, []);
 
@@ -84,17 +83,17 @@ function App(props) {
     }
 
     return ( 
-    <div> 
-    <main>
+    <> 
     <BrowserRouter>
             <Nav logout={logout} showSignUpModal={showSignUpModal} showLoginModal={showLoginModal} currentUser={currentUser}/> 
+            <main>
             <Route
                 exact
                 path="/"
                 render={(routeProps) => (
                 <>{ currentUser !== null ? <Redirect push to="/feed"/> :
                     <>
-                    <h1>HOME/WELCOME</h1>
+                    <HomePage />
                     <SignUp {...routeProps} show={signUpShow}
                     onHide={() => setSignUpModal(false)} handleLogin={handleLogin}/>
                     <LogIn {...routeProps} show={loginShow}
@@ -115,18 +114,16 @@ function App(props) {
             )}/>
             <Route
                 path="/feed"
-                render={(routeProps) => ( <> <LookContainer  routeProps={routeProps} looks={looks} setLooks={setLooks} handleEditing={handleEditing}/> 
-                {/* <LookForm/> */}
-                 </>)} />
+                render={(routeProps) => (<LookContainer  routeProps={routeProps} looks={looks} setLooks={setLooks} handleEditing={handleEditing}/> 
+                 )} />
             <Route
                 path="/login"
                 render={() => (
                 <h1>LOG IN HERE</h1>
             )}/>
-
+            </main>
     </BrowserRouter>
-    </main>
-    </div>);
+    </>);
 }
 
 export default App;

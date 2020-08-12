@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
-// import Button from 'react-bootstrap/Button';
 
 function Nav({ showSignUpModal, showLoginModal, logout, history, currentUser }) {
 
@@ -15,30 +14,28 @@ function Nav({ showSignUpModal, showLoginModal, logout, history, currentUser }) 
                 { currentUser !== null ?
                     <>
                         <li>
-                            <Link to='/profile'>profile</Link>
+                            <Link to='/feed'>LOGO</Link>
                         </li>
-                        {/* <li>
-                            <Link to='/feed'>feed</Link>
-                        </li> */}
                         <li>
+                            <Link to='/profile'>profile</Link> <br/>
                             <Link to='/look'>look</Link>
                         </li>
                         <li>
-                        <button onClick={handleLogout}>
-                        Log Out
+                        <button className="link-button" onClick={handleLogout}>
+                        log out
                         </button>
                         </li>
                     </>
                         :
                     <>
                         <li>
-                        <button onClick={() => showSignUpModal()}>
-                            Sign Up
+                        <button className="link-button" onClick={() => showSignUpModal()}>
+                            sign up
                         </button>
                         </li>
                         <li>
-                        <button onClick={() => showLoginModal()}>
-                        Log In
+                        <button className="link-button" onClick={() => showLoginModal()}>
+                        log in
                         </button>
                         </li>
                     </>
