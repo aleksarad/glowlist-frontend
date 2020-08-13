@@ -105,7 +105,7 @@ function App() {
             <Route
                 path="/profile"
                 render={() => (
-                <Profile/>
+                <Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/>
             )}/>
             <Route
                 path="/look"
@@ -114,7 +114,7 @@ function App() {
             )}/>
             <Route
                 path="/feed"
-                render={(routeProps) => (<LookContainer  routeProps={routeProps} looks={looks} setLooks={setLooks} handleEditing={handleEditing}/> 
+                render={(routeProps) => (<LookContainer  routeProps={routeProps} looks={looks} setLooks={setLooks} updateLookState={updateLookState} handleEditing={handleEditing}/> 
                  )} />
             <Route
                 path="/login"

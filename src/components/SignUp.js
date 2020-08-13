@@ -9,13 +9,6 @@ export default function SignUp({ history, show, onHide, handleLogin }) {
     const [facechart, setFaceChart] = useState("124")
     const [background_color, setBackgroundColor] = useState("#9c5941")
 
-    const handleUsernameChange = (evt) => {
-        setUsername(evt.target.value)
-    }
-
-    const handlePasswordChange = (evt) => {
-        setPassword(evt.target.value)
-    }
 
     const handleSubmit = (evt) => {
       evt.preventDefault()
@@ -64,9 +57,9 @@ export default function SignUp({ history, show, onHide, handleLogin }) {
         <div>   
 
                 <h1 style={{textAlign: 'center'}}>create an account</h1>
-                <input className="underline-input" value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
+                <input className="underline-input" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="username"/>
                 <br/>
-                <input className="underline-input"  value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>
+                <input className="underline-input"  value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"/>
                 <br/>
 
                 <div id="color-preference-container">
