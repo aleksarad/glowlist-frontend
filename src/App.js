@@ -7,6 +7,8 @@ import Profile from './components/Profile'
 import LookContainer from './components/LookContainer'
 import LookForm from './components/LookForm'
 import HomePage from './components/HomePage'
+import SearchBar from './components/SearchBar'
+import Filter from './components/Filter'
 
 function App() {
     const [signUpShow, setSignUpModal] = useState(false);
@@ -14,6 +16,8 @@ function App() {
     const [currentUser, setCurrentUser] = useState(null)
     const [editing, setEditing] = useState(null)
     const [looks, setLooks] = useState([])
+    const [searchTerm, setSearch] = useState("")
+    const [filter, setFilter] = useState("")
 
 
     useEffect(() => {
@@ -82,6 +86,17 @@ function App() {
           setLooks(updatedLooks)
     }
 
+    const searchFilterLooks = () => {
+            let filtered = looks.filter(look => look.name.toLowerCase().includes(searchTerm))
+            if (filter === 'complete') {
+                filtered = filtered.filter(look => look.completed === true)
+            }
+            if (filter === 'incomplete') {
+                filtered = filtered.filter(look => look.completed === false)
+            }
+            return filtered
+    }
+
     return ( 
     <> 
     <BrowserRouter>
@@ -114,7 +129,12 @@ function App() {
             )}/>
             <Route
                 path="/feed"
-                render={(routeProps) => (<LookContainer  routeProps={routeProps} looks={looks} setLooks={setLooks} updateLookState={updateLookState} handleEditing={handleEditing}/> 
+                render={(routeProps) => (
+                <>
+                <SearchBar setSearch={setSearch}/>
+                <Filter setFilter={setFilter}/>
+                <LookContainer  routeProps={routeProps} looks={searchFilterLooks()} setLooks={setLooks} updateLookState={updateLookState} handleEditing={handleEditing}/>
+                </> 
                  )} />
             <Route
                 path="/login"

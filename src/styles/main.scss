@@ -152,7 +152,7 @@ nav {
     height: 100%;
     width: 230px;
     position: fixed;
-    border-right: $border;
+    border-right: 2px solid #ff76c6;
     top: 0;
     left: 0;
     overflow-x: hidden;
@@ -221,8 +221,10 @@ main {
 }
 
 .form-canvas-container {
+    // width: 600px;
+    // height: 600px;
     width: 100% !important;
-    object-fit: contain;
+    height: calc(width * 1)
 }
 
 .underline-input {
@@ -340,4 +342,44 @@ main {
 .mark-completed svg {
     cursor: pointer;
     margin-left: 10px;
+}
+
+/*MEDIA QUERY*/
+
+@media (max-width: 992px) { 
+    nav {
+        height: 100px;
+        width: 100%;
+        position: fixed;
+        border-bottom: 2px solid #ff76c6;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        padding: 25px 0;
+        margin: 0;
+        background-color: white;
+        z-index: 3000
+    }
+
+    nav ul {
+        flex-direction: row;
+        height: 100%;
+        width: 100%;
+        justify-content: space-between;
+        // align-items: center;
+        // padding: 0;
+        // margin: 0;
+        // font-size: $font-medium;
+        // font-weight: 500;
+    }
+
+    main {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 120px;
+    }
+
+    .logo {
+        margin-left: 1rem;
+    }
 }

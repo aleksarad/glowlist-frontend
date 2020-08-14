@@ -17,7 +17,7 @@ export default class LookForm extends React.Component {
         height: 550,
         brushRadius: 5,
         lazyRadius: 0,
-        background_image: faceChart,
+        background_image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Square-symbol.svg/2000px-Square-symbol.svg.png',
         //this should come from users BC
         background_color: this.props.currentUser.background_color,
         displayColorPicker: false
