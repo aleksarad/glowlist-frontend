@@ -14,11 +14,11 @@ function Nav({ showSignUpModal, showLoginModal, logout, history, currentUser }) 
                 { currentUser !== null ?
                     <>
                         <li>
-                            <Link to='/feed'>LOGO</Link>
+                            <Link className="logo" to='/feed'>glowlist</Link>
                         </li>
                         <li>
                             <Link to='/profile'>profile</Link> <br/>
-                            <Link to='/look'>look</Link>
+                            <Link to='/look'>new look</Link>
                         </li>
                         <li>
                         <button className="link-button" onClick={handleLogout}>
@@ -29,12 +29,12 @@ function Nav({ showSignUpModal, showLoginModal, logout, history, currentUser }) 
                         :
                     <>
                         <li>
-                        <button className="link-button" onClick={() => showSignUpModal()}>
+                        <button className="link-button" style={{color: '#ff3aad', fontWeight: '500'}} onClick={() => showSignUpModal()}>
                             sign up
                         </button>
                         </li>
                         <li>
-                        <button className="link-button" onClick={() => showLoginModal()}>
+                        <button className="link-button" style={{color: '#ff3aad', fontWeight: '500'}} onClick={() => showLoginModal()}>
                         log in
                         </button>
                         </li>

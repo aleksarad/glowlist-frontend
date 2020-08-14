@@ -42,9 +42,6 @@ export default function Login({ history, show, onHide, handleLogin }) {
                 console.log(data)
             }
         })
-
-        setUsername("")
-        setPassword("")
     }
 
 

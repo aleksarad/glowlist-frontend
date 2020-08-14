@@ -1,15 +1,19 @@
 $border: 2px solid white;
+$font-large: 2rem;
+$font-medium: 1.1rem;
 
 /**/ 
 // @font-face {
 //     font-family: neon;
 //     src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
 // }
-
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
   
   .neon-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 85vw;
@@ -19,11 +23,11 @@ $border: 2px solid white;
   
   .flux {
 
-    font-family: 'Sriracha', cursive;
-    color: #ffb6ef;
+    font-family: 'Pacifico', cursive;
+    color: #ff76c6;
     font-size: 9vw;
     line-height: 9vw;
-    text-shadow: 0 0 3vw #ff82e4;
+    text-shadow: 0 0 3vw #ff76c6;
   }
   
   
@@ -34,27 +38,28 @@ $border: 2px solid white;
     -o-animation: flux 2s linear infinite;
   }
   
-//   @keyframes flux {
-//     0%,
-//     100% {
-//       text-shadow: 0 0 1vw #ff9fe2, 0 0 1.5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 .2vw #ff9fe2, .5vw .5vw .1vw #df3799;
-//       color: #ffafe7;
-//     }
-//     50% {
-//       text-shadow: 0 0 .5vw #ff72c0, 0 0 1.5vw #ff72c0, 0 0 5vw #ff72c0, 0 0 5vw #ff72c0, 0 0 .2vw #ff72c0, .5vw .5vw .1vw #7a0144;
-//       color: #ff52da;
-//     }
-//   }
+  @keyframes flux {
+    0%,
+    100% {
+      text-shadow: 0 0 1vw #ff9fe2, 0 0 1.5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 .2vw #ff9fe2, .5vw .5vw .1vw #df3799;
+      color: #ff76c6;
+    }
+    50% {
+      text-shadow: 0 0 .5vw #ff72c0, 0 0 .75vw #ff72c0, 0 0 2.5vw #ff72c0, 0 0 2.5vw #ff72c0, 0 0 .1vw #ff72c0, .5vw .5vw .1vw #7a0144;
+      color:  #ff3aad;
+    }
+  }
   
 /**/
 
 body {
     background-color: black;
     color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
 :focus {
-    outline: none !important;
+    // outline: none !important;
     // box-shadow: 0 0 10px #719ECE;
     // border: 1px solid rgb(255, 255, 255) !important;
 }
@@ -145,7 +150,7 @@ p {
 /*NAV*/
 nav {
     height: 100%;
-    width: 180px;
+    width: 230px;
     position: fixed;
     border-right: $border;
     top: 0;
@@ -153,6 +158,7 @@ nav {
     overflow-x: hidden;
     padding: 25px 0;
     margin: 0;
+    background-color: white;
 }
 
 nav ul {
@@ -165,23 +171,33 @@ nav ul {
     align-items: center;
     padding: 0;
     margin: 0;
+    font-size: $font-medium;
+    font-weight: 500;
 }
 
 nav ul a {
-    color: white;
+    color: black;
+    // font-size: $font-medium;
 }
 
 .link-button {
     background: none!important;
     border: none;
     padding: 0!important;
-    color: white;
+    color: black;
     cursor: pointer;
+}
+
+.logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    color: #ff3aad;
+    text-shadow: 3px 2px 6px #ff3aad;
 }
 
 /*MAIN*/
 main {
-    margin-left: 180px;
+    margin-left: 230px;
     padding: 20px;
     z-index: 20;
 }
@@ -193,7 +209,7 @@ main {
     padding: 30px;
     // z-index: 3000;
     overflow: hidden;
-    width: 70%;
+    width: 75%;
     margin: 0 auto;
     border-radius: 10px;
     text-align: center;
@@ -212,7 +228,7 @@ main {
 .underline-input {
     height: 25px;
     border: none;
-    background-color: black;
+    background-color: transparent;
     color: white;
     text-align: left;
     border-bottom: $border;
@@ -282,4 +298,46 @@ main {
 #sketch-container {
     border: $border;
     border-radius: 10px;
+}
+
+/*LOOK CARD*/
+
+.look-card {
+    overflow: hidden;
+    border: $border;
+    width: 70%;
+    margin: 2rem auto;
+    border-radius: 10px;
+    padding: 30px 30px 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    // -webkit-box-shadow: 0px 0px 13px 2px rgba(255,58,173,1);
+    // -moz-box-shadow: 0px 0px 13px 2px rgba(255,58,173,1);
+    // box-shadow: 0px 0px 13px 2px rgba(255,58,173,1);
+}
+
+.look-name {
+    font-size: $font-large;
+}
+
+.look-description {
+    font-size: $font-medium;
+    line-height: 1.2;
+    margin: 1rem 1rem 1rem 0;
+}
+
+.left-column, .right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mark-completed {
+    font-size: 1.5rem;
+    text-align: right;
+}
+
+.mark-completed svg {
+    cursor: pointer;
+    margin-left: 10px;
 }

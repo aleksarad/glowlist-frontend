@@ -1,6 +1,6 @@
 import React from 'react';
 import CanvasDraw from "react-canvas-draw";
-import {ChromePicker, BlockPicker, HuePicker, AlphaPicker} from 'react-color';
+import {ChromePicker, BlockPicker, HuePicker, AlphaPicker, CompactPicker, GithubPicker} from 'react-color';
 import reactCSS from 'reactcss'
 import faceChart from '../images/facechart1.png'
 
@@ -10,9 +10,7 @@ export default class LookForm extends React.Component {
         sketch: null,
         name: '',
         description: '',
-        colors: [
-            "pink", "purple", "green"
-        ],
+        colors: [],
         user_id: this.props.currentUser.id,
         color: "rgba(255,51,153,1)",
         width: 550,
@@ -67,6 +65,28 @@ export default class LookForm extends React.Component {
         this.setState({color: rgbColor})
     }
 
+    handleChangeComplete = (color) => {
+        const colorsArr = this.state.colors 
+        if (colorsArr.length > 8) {
+            console.log("too many colors!")
+        }
+        else {
+            colorsArr.push(color.hex)
+        }
+        this.setState({ colors: colorsArr, displayColorPicker: false})
+    }
+
+    deleteColor = (deleting) => {
+        const colorsArr = this.state.colors 
+        const filtered = colorsArr.filter(color => color !== deleting)
+        this.setState({ colors: filtered })
+    }
+
+    // renderColors = () => {
+    // this.state.colors.forEach(color => { 
+    //     return <p>{color}</p>} )
+    // }
+
     handleSubmit = (e) => {
         e.preventDefault()
         const token = localStorage.getItem("token")
@@ -112,6 +132,19 @@ export default class LookForm extends React.Component {
     }
 
     render() {
+        const popover = {
+            position: 'absolute',
+            zIndex: '2',
+          }
+          const cover = {
+            position: 'fixed',
+            top: '0px',
+            right: '0px',
+            bottom: '0px',
+            left: '0px',
+          }
+
+          console.log(this.state.colors)
         return (
             <div id="look-form-container">
                 <div id="look-form">
@@ -178,18 +211,28 @@ export default class LookForm extends React.Component {
                         brushRadius: parseInt(e.target.value, 10)
                     })}/>
 
-                    {/* <div style={ styles.swatch } className="align-middle" onClick={ this.handleClick }>
-                        <div style={ styles.color }/>
-                    </div>
-
-                    { this.state.displayColorPicker ? <div style={ styles.popover }>
-                    <div style={ styles.cover } onClick={ this.handleClose }/>
-                        <ChromePicker color={ this.state.color } onChange={(color) => this.handleColorChange(color.rgb)} />
-                    </div> : null } */}
                     <HuePicker className="color-picker" color={this.state.color} onChange={(color) => this.handleColorChange(color.rgb)} />
                     <AlphaPicker className="color-picker opacity" color={this.state.color} onChange={(color) => this.handleColorChange(color.rgb)} />
                 </div>
                 <br/>
+                <p style={{textAlign: 'left'}} className="sketch-label">color story</p>
+
+
+                <button onClick={ this.handleClick }>add swatch</button>
+                { this.state.displayColorPicker ? <div style={ popover }>
+                    <div style={ cover } onClick={ this.handleClose }/>
+                    <CompactPicker onChangeComplete={this.handleChangeComplete}/>
+                </div> : null }
+                    <br/>
+                    <br/>
+
+                <div>{this.state.colors.map(color => <span 
+                onClick={() => this.deleteColor(color)}
+                style={{backgroundColor:color,
+                    height: '50px', width: '50px', display: 'inline-block'}}>
+                    </span>)}
+                </div>
+
                 <button onClick={this.handleSubmit}>submit</button>
                 </div>
             </div> 
