@@ -2,7 +2,21 @@ import React from 'react';
 import CanvasDraw from "react-canvas-draw";
 import {ChromePicker, BlockPicker, HuePicker, AlphaPicker, CompactPicker, GithubPicker} from 'react-color';
 import reactCSS from 'reactcss'
-import faceChart from '../images/facechart1.png'
+import faceChart1 from '../images/faceChart1.png'
+import faceChart2 from '../images/faceChart2.png'
+import faceChart3 from '../images/faceChart3.png'
+
+const findFaceChart = (faceChart) => {
+    if(faceChart.includes("faceChart1")) {
+        return faceChart1
+    }
+    else if(faceChart.includes("faceChart2")) {
+        return faceChart2
+    }
+    else if(faceChart.includes("faceChart3")) {
+        return faceChart3
+    }
+}
 
 
 export default class LookForm extends React.Component {
@@ -17,7 +31,7 @@ export default class LookForm extends React.Component {
         height: 550,
         brushRadius: 5,
         lazyRadius: 0,
-        background_image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Square-symbol.svg/2000px-Square-symbol.svg.png',
+        background_image: findFaceChart(this.props.currentUser.facechart),
         //this should come from users BC
         background_color: this.props.currentUser.background_color,
         displayColorPicker: false
@@ -26,17 +40,15 @@ export default class LookForm extends React.Component {
     componentDidMount() {
         const editing = this.props.editing
         if (editing !== null) {
-
             this.setState({
                 sketch: JSON.stringify(this.saveableCanvas.getSaveData()),
                 name: editing.name,
                 description: editing.description,
                 colors: editing.colors,
                 user_id: editing.user_id,
-                background_image: editing.background_image,
+                background_image: findFaceChart(editing.background_image),
                 background_color: editing.background_color
             })
-
         }
     }
 
@@ -82,11 +94,6 @@ export default class LookForm extends React.Component {
         this.setState({ colors: filtered })
     }
 
-    // renderColors = () => {
-    // this.state.colors.forEach(color => { 
-    //     return <p>{color}</p>} )
-    // }
-
     handleSubmit = (e) => {
         e.preventDefault()
         const token = localStorage.getItem("token")
@@ -119,9 +126,7 @@ export default class LookForm extends React.Component {
                 .then(r => r.json())
                 .then(newLook => {
                     console.log(newLook)
-                    this
-                        .props
-                        .setLooks(prevLooks => [
+                    this.props.setLooks(prevLooks => [
                             newLook, ...prevLooks
                         ])
                 })
@@ -132,6 +137,7 @@ export default class LookForm extends React.Component {
     }
 
     render() {
+        console.log(this.props.editing)
         const popover = {
             position: 'absolute',
             zIndex: '2',
@@ -182,6 +188,7 @@ export default class LookForm extends React.Component {
                     </div>
 
                     <CanvasDraw
+                        style={{backgroundColor: `${this.state.background_color}`}}
                         className="form-canvas-container"
                         onChange={() => {
                         this.setState({
@@ -193,10 +200,10 @@ export default class LookForm extends React.Component {
                         brushColor={this.state.color}
                         brushRadius={this.state.brushRadius}
                         lazyRadius={this.state.lazyRadius}
-                        canvasWidth={this.state.width}
-                        canvasHeight={this.state.height}
+                        // canvasWidth={this.state.width}
+                        // canvasHeight={this.state.height}
                         imgSrc={this.state.background_image}
-                        backgroundColor={this.state.background_color}
+                        // backgroundColor={this.state.background_color}
                         saveData={this.props.editing !== null
                         ? JSON.stringify(this.props.editing.sketch)
                         : ''}
@@ -211,14 +218,16 @@ export default class LookForm extends React.Component {
                         brushRadius: parseInt(e.target.value, 10)
                     })}/>
 
-                    <HuePicker className="color-picker" color={this.state.color} onChange={(color) => this.handleColorChange(color.rgb)} />
+                    <HuePicker className="color-picker" color={this.state.color} onChange={(color) => this.handleColorChange(color.rgb)} onChangeComplete={this.handleChangeComplete} />
                     <AlphaPicker className="color-picker opacity" color={this.state.color} onChange={(color) => this.handleColorChange(color.rgb)} />
                 </div>
                 <br/>
-                <p style={{textAlign: 'left'}} className="sketch-label">color story</p>
 
+                <div id="color-story-container">
+                    <p className="sketch-label">color story</p>
+                    <button className="button" onClick={ this.handleClick }>add swatch</button>
+                </div>
 
-                <button onClick={ this.handleClick }>add swatch</button>
                 { this.state.displayColorPicker ? <div style={ popover }>
                     <div style={ cover } onClick={ this.handleClose }/>
                     <CompactPicker onChangeComplete={this.handleChangeComplete}/>
@@ -232,8 +241,8 @@ export default class LookForm extends React.Component {
                     height: '50px', width: '50px', display: 'inline-block'}}>
                     </span>)}
                 </div>
-
-                <button onClick={this.handleSubmit}>submit</button>
+                <br/>
+                <button className="important-button" onClick={this.handleSubmit}>submit</button>
                 </div>
             </div> 
         )

@@ -17,11 +17,11 @@ function Nav({ showSignUpModal, showLoginModal, logout, history, currentUser }) 
                             <Link className="logo" to='/feed'>glowlist</Link>
                         </li>
                         <li>
-                            <Link to='/profile'>profile</Link> <br/>
-                            <Link to='/look'>new look</Link>
+                            <Link to='/look' className="new-look">new look</Link> <br/>
+                            <Link to='/profile'>profile</Link> 
                         </li>
                         <li>
-                        <button className="link-button" onClick={handleLogout}>
+                        <button className="link-button logout" onClick={handleLogout}>
                         log out
                         </button>
                         </li>

@@ -8,6 +8,6 @@ export default function LookContainer({looks, setLooks, handleEditing, routeProp
     const lookCards = looks.map(look => <LookCard key={look.id} {...routeProps} look={look} setLooks={setLooks} updateLookState={updateLookState} handleEditing={handleEditing}/>)
 
     return (
-        <div>{lookCards}</div>
+        <>{lookCards}</>
     )
 }

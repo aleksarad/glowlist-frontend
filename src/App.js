@@ -130,11 +130,11 @@ function App() {
             <Route
                 path="/feed"
                 render={(routeProps) => (
-                <>
+                <div id="feed-container">
                 <SearchBar setSearch={setSearch}/>
                 <Filter setFilter={setFilter}/>
                 <LookContainer  routeProps={routeProps} looks={searchFilterLooks()} setLooks={setLooks} updateLookState={updateLookState} handleEditing={handleEditing}/>
-                </> 
+                </div> 
                  )} />
             <Route
                 path="/login"

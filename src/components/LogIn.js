@@ -60,7 +60,7 @@ export default function Login({ history, show, onHide, handleLogin }) {
           </Modal.Title> */}
         </Modal.Header>
         <Modal.Body>
-        <div>   
+        <div className="modal-body-container">   
 
                 <h1 style={{textAlign: 'center'}}>log in</h1>
                 <input className="underline-input" value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
@@ -71,7 +71,7 @@ export default function Login({ history, show, onHide, handleLogin }) {
                 
         </div>
         <div className="form-footer">
-             <button type="submit" onClick={handleSubmit}>Submit</button>
+             <button className="important-button" type="submit" onClick={handleSubmit}>Submit</button>
         </div>
         </Modal.Body>
       </Modal>

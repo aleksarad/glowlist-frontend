@@ -1,6 +1,8 @@
 $border: 2px solid white;
 $font-large: 2rem;
 $font-medium: 1.1rem;
+$font-small: .9rem;
+$theme-pink: #ff57b9;
 
 /**/ 
 // @font-face {
@@ -16,13 +18,12 @@ $font-medium: 1.1rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 85vw;
+    width: 100%;
     height: 100vh;
   }
   
   
   .flux {
-
     font-family: 'Pacifico', cursive;
     color: #ff76c6;
     font-size: 9vw;
@@ -38,19 +39,19 @@ $font-medium: 1.1rem;
     -o-animation: flux 2s linear infinite;
   }
   
-  @keyframes flux {
-    0%,
-    100% {
-      text-shadow: 0 0 1vw #ff9fe2, 0 0 1.5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 .2vw #ff9fe2, .5vw .5vw .1vw #df3799;
-      color: #ff76c6;
-    }
-    50% {
-      text-shadow: 0 0 .5vw #ff72c0, 0 0 .75vw #ff72c0, 0 0 2.5vw #ff72c0, 0 0 2.5vw #ff72c0, 0 0 .1vw #ff72c0, .5vw .5vw .1vw #7a0144;
-      color:  #ff3aad;
-    }
-  }
+//   @keyframes flux {
+//     0%,
+//     100% {
+//       text-shadow: 0 0 1vw #ff9fe2, 0 0 1.5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 .2vw #ff9fe2, .5vw .5vw .1vw #df3799;
+//       color: #ff76c6;
+//     }
+//     50% {
+//       text-shadow: 0 0 .5vw #ff72c0, 0 0 .75vw #ff72c0, 0 0 2.5vw #ff72c0, 0 0 2.5vw #ff72c0, 0 0 .1vw #ff72c0, .5vw .5vw .1vw #7a0144;
+//       color:  #ff3aad;
+//     }
+//   }
   
-/**/
+/*universal styles*/
 
 body {
     background-color: black;
@@ -64,7 +65,7 @@ body {
     // border: 1px solid rgb(255, 255, 255) !important;
 }
 
-button {
+.button {
     border: $border;
     width: 100px;
     background-color: black;
@@ -72,9 +73,24 @@ button {
     border-radius: 3px;
 }
 
-button:hover {
+.button:hover {
     background-color: white;
     color: black;
+}
+
+.important-button {
+    border: $border;
+    box-shadow: 0px 0px 7px 1px white;
+    background-color: $theme-pink;
+    color: white;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: $font-medium;
+    transition: box-shadow 500ms;
+}
+
+.important-button:hover {
+    box-shadow: 0px 0px 10px 2px white, 0px 0px 15px 4px $theme-pink;
 }
 
 /*SIGN UP MODAL*/
@@ -91,6 +107,10 @@ button:hover {
     opacity: 1;
 }
 
+.close span {
+    padding: 10px;
+}
+
 .modal-content {
     background-color: black;
     border: $border;
@@ -98,9 +118,14 @@ button:hover {
 }
 
 .modal-body {
-    width: 75%;
+    width: 90%;
     margin: auto;
     padding: 0;
+}
+
+.modal-body-container {
+    width: 80%;
+    margin: auto;
 }
 
 .modal-body .underline-input {
@@ -146,6 +171,22 @@ p {
     margin: 30px 0 30px 0;
 }
 
+.face-chart-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.facechart {
+    width: 30%;
+    // height: 50%;
+    border-radius: 3%;
+    cursor: pointer;
+}
+
+.selected-chart {
+    border: 2px solid $theme-pink;
+}
+
 
 /*NAV*/
 nav {
@@ -177,7 +218,11 @@ nav ul {
 
 nav ul a {
     color: black;
-    // font-size: $font-medium;
+}
+
+nav ul a:hover {
+    text-decoration: none;
+    color: $theme-pink
 }
 
 .link-button {
@@ -195,10 +240,18 @@ nav ul a {
     text-shadow: 3px 2px 6px #ff3aad;
 }
 
+.logout {
+    font-size: $font-small;
+}
+
+.new-look {
+    text-shadow: 0px 0px 10px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 20px $theme-pink, 0px 0px 25px $theme-pink;
+}
+
 /*MAIN*/
 main {
     margin-left: 230px;
-    padding: 20px;
+    // padding: 20px;
     z-index: 20;
 }
 
@@ -209,10 +262,11 @@ main {
     padding: 30px;
     // z-index: 3000;
     overflow: hidden;
-    width: 75%;
-    margin: 0 auto;
+    width: 70%;
+    margin: 3rem auto;
     border-radius: 10px;
     text-align: center;
+    box-shadow: inset 0px 0px 6px 1px white;
 }
 
 #look-form {
@@ -220,11 +274,18 @@ main {
     margin: 0 auto;
 }
 
-.form-canvas-container {
+.form-canvas-container canvas {
     // width: 600px;
     // height: 600px;
-    width: 100% !important;
-    height: calc(width * 1)
+    width: 30vw !important;
+    height: 30vw !important;
+}
+
+
+.form-canvas-container {
+    // margin: 0 auto;
+    width: 30vw !important;
+    height: 30vw !important;
 }
 
 .underline-input {
@@ -293,13 +354,56 @@ main {
 }
 
 .sketch-label {
-    margin-top: 20px;
+    // margin-top: 20px;
     font-size: 1.3rem;
 }
 
 #sketch-container {
     border: $border;
     border-radius: 10px;
+    overflow: hidden;
+}
+
+#color-story-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*FEED*/
+
+#feed-container {
+    width: 70%;
+    margin: auto;
+    padding-top: 2rem;
+}
+
+#feed-container #search {
+    width: 70%;
+    line-height: initial;
+    height: 48px;
+    border-radius: 7px;
+    border: 2px solid $theme-pink;
+    background-color: black;
+    color: $theme-pink;
+    font-size: $font-medium;
+    padding-left: 10px;
+    box-shadow: inset 0px 0px 6px 1px $theme-pink;
+}
+
+#feed-container #filter {
+    width: 30%;
+    height: 48px;
+    border-radius: 7px;
+    border: 2px solid $theme-pink;
+    background-color: black;
+    color: $theme-pink;
+    font-size: $font-medium;
+    padding-left: 10px;
+    box-shadow: inset 0px 0px 6px 1px $theme-pink;
+}
+
+#feed-container #search::placeholder {
+    color: $theme-pink;
 }
 
 /*LOOK CARD*/
@@ -307,12 +411,12 @@ main {
 .look-card {
     overflow: hidden;
     border: $border;
-    width: 70%;
-    margin: 2rem auto;
+    margin: 3rem 0;
     border-radius: 10px;
-    padding: 30px 30px 15px 30px;
+    padding: 30px 30px 20px 30px;
     display: flex;
     justify-content: space-between;
+    box-shadow: inset 0px 0px 6px 1px white;
     // -webkit-box-shadow: 0px 0px 13px 2px rgba(255,58,173,1);
     // -moz-box-shadow: 0px 0px 13px 2px rgba(255,58,173,1);
     // box-shadow: 0px 0px 13px 2px rgba(255,58,173,1);
@@ -335,20 +439,43 @@ main {
 }
 
 .mark-completed {
-    font-size: 1.5rem;
+    font-size: $font-medium;
     text-align: right;
 }
 
 .mark-completed svg {
     cursor: pointer;
+    font-size: 1.5rem;
     margin-left: 10px;
+    border-radius: 50%;
+}
+
+.disabled-canvas {
+    border-radius: 10px;
+    // width: 25vw;
+    // height: 25vw;
+    margin-bottom: 25px;
+}
+
+.disabled-canvas canvas {
+    border-radius: 10px;
+    width: 28vw !important;
+    height: 28vw !important;
+    margin: 0 auto;
+}
+
+.delete-button, .edit-button {
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 1.5rem;
 }
 
 /*MEDIA QUERY*/
 
 @media (max-width: 992px) { 
     nav {
-        height: 100px;
+        height: 11vh;
         width: 100%;
         position: fixed;
         border-bottom: 2px solid #ff76c6;
@@ -376,10 +503,47 @@ main {
     main {
         width: 100%;
         margin-left: 0;
-        margin-top: 120px;
+        margin-top: 11vh;
+    }
+
+    .neon-container {
+        height: 89vh;
     }
 
     .logo {
         margin-left: 1rem;
     }
+}
+
+/*PROFILE*/
+
+.profile-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.profile-container .underline-input {
+    width: 100%;
+}
+
+#profile-background-selector {
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile-background-selector p {
+    align-self: center;
+}
+
+.profile-container #button-container {
+    text-align: center;
+}
+
+.profile-container * {
+    margin: 7px 0;
+}
+
+#username {
+    margin: 7rem 0 3rem 0;
+    text-shadow: 0px 0px 10px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 20px $theme-pink, 0px 0px 25px $theme-pink;
 }
