@@ -7,6 +7,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
     // const { background_color, facechart, id, username, password_digest } = currentUser
     console.log(currentUser)
 
+    const [updateStatus, setUpdateStatus] = useState(false)
     const [username, setUsername] = useState(currentUser.username)
     const [password, setPassword] = useState("")
     const [facechart, setFaceChart] = useState(currentUser.facechart)
@@ -32,7 +33,10 @@ export default function Profile({ currentUser, setCurrentUser }) {
             })
         })
         .then(resp => resp.json())
-        .then(updatedUser => setCurrentUser(updatedUser))
+        .then(updatedUser => {
+            setCurrentUser(updatedUser)
+            setUpdateStatus(true)
+        })
     }
 
     const updateFace = (e) => {
@@ -43,6 +47,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
         <div className="profile-container">
             {console.log(facechart)}
             <h1 id="username">{username}'s profile</h1>
+            {updateStatus ? <p style={{textAlign: 'center'}}>update successful!</p> : null}
             <div>
                <input className="underline-input" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="username"/>
                 <br/>

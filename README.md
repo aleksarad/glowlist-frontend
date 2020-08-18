@@ -1,68 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# glowlist #
+by [Aleksa](https://github.com/aleksarad) 💗
 
-## Available Scripts
+![app logo](src/images/glowlist.png)
 
-In the project directory, you can run:
+## Overview ##
 
-### `yarn start`
+Glowlist is an app for makeup enthusiasts to sketch out and store their makeup look ideas.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Glowlist allows a user to:
+* Sign up and create an account
+* Select a facechart and skintone that will serve as the backdrop for all their looks. This can be updated any time in their profile. Allowing for one user to have a catalog of looks with many different facecharts and skintones.
+* Create a makeup look by sketching on a facechart.
+* View all their looks, edit their looks, and even mark them as complete once they've translated their sketch into a real life makeup application.
+* Search through looks by name, and filter looks by completion.
+* Log in/log out & remain auto logged in after sign up/ log in.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+## Built With ##
+Frontend: React, React Boostrap, React Canvas Draw, Sass, React Color
+Backend: Ruby On Rails, Postgres DB
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features ##
+* JWT Auth
+* User account customization
 
-### `yarn build`
+## Improvements & Challenges ##
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Resources used ##
+* [Figma](https://www.figma.com/) - Creating mockups/prototypes for site layout and design
+* [React-Canvas-Draw](https://github.com/embiem/react-canvas-draw) - A canvas drawing library for React
+* [React-Color](https://casesandberg.github.io/react-color/) - A collection of React color pickers. Besides style and preference, the advantage of using React Color over an HTML color input is that React Color provides opacity options.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

@@ -6,7 +6,7 @@ import faceChart3 from '../images/faceChart3.png'
 
 export default function SignUp({ history, show, onHide, handleLogin }) {
 
-
+    const [error, setError] = useState(null)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [facechart, setFaceChart] = useState("")
@@ -33,11 +33,13 @@ export default function SignUp({ history, show, onHide, handleLogin }) {
         if(data.token) {
             localStorage.setItem("token", data.token)
             handleLogin(data.user)
+            setError(null)
             onHide()
             history.push('/feed')
         }
         else {
             console.log(data)
+            setError(data.error)
         }
     })
   }
@@ -62,6 +64,7 @@ export default function SignUp({ history, show, onHide, handleLogin }) {
         <div className="modal-body-container">   
 
                 <h1 style={{textAlign: 'center'}}>create an account</h1>
+                <p style={{textAlign: 'center'}}>{error}</p>
                 <input className="underline-input" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="username"/>
                 <br/>
                 <input className="underline-input"  value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"/>

@@ -27,8 +27,8 @@ export default class LookForm extends React.Component {
         colors: [],
         user_id: this.props.currentUser.id,
         color: "rgba(255,51,153,1)",
-        width: 550,
-        height: 550,
+        width: 525,
+        height: 525,
         brushRadius: 5,
         lazyRadius: 0,
         background_image: findFaceChart(this.props.currentUser.facechart),
@@ -200,8 +200,8 @@ export default class LookForm extends React.Component {
                         brushColor={this.state.color}
                         brushRadius={this.state.brushRadius}
                         lazyRadius={this.state.lazyRadius}
-                        // canvasWidth={this.state.width}
-                        // canvasHeight={this.state.height}
+                        canvasWidth={this.state.width}
+                        canvasHeight={this.state.height}
                         imgSrc={this.state.background_image}
                         // backgroundColor={this.state.background_color}
                         saveData={this.props.editing !== null
@@ -225,7 +225,12 @@ export default class LookForm extends React.Component {
 
                 <div id="color-story-container">
                     <p className="sketch-label">color story</p>
-                    <button className="button" onClick={ this.handleClick }>add swatch</button>
+                    <button id="add-swatch" onClick={ this.handleClick }>
+                    <svg viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                    </svg>
+                    </button>
                 </div>
 
                 { this.state.displayColorPicker ? <div style={ popover }>
