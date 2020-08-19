@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-export default function Login({ history, show, onHide, handleLogin }) {
+export default function Login({ history, show, onHide, handleLogin, setCurrentUser }) {
 
-    useEffect(() => console.log("mounted"))
+    // useEffect()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -18,7 +18,6 @@ export default function Login({ history, show, onHide, handleLogin }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(username, password)
         fetch(`http://localhost:3000/login`, {
             method: "POST",
             headers: {
@@ -33,6 +32,7 @@ export default function Login({ history, show, onHide, handleLogin }) {
         .then(r => r.json())
         .then(data => {
             if(data.token) {
+                setCurrentUser(data.user)
                 localStorage.setItem("token", data.token)
                 handleLogin(data.user)
                 onHide()

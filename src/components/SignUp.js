@@ -57,7 +57,6 @@ export default function SignUp({ history, show, onHide, handleLogin }) {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        {console.log(facechart)}
         <Modal.Header closeButton className="">
         </Modal.Header>
         <Modal.Body>
@@ -73,15 +72,15 @@ export default function SignUp({ history, show, onHide, handleLogin }) {
                 <div id="color-preference-container">
                     <div>
                         <p>select skin tone</p>
-                        <p>this can be updated in your profile later</p>
+                        <p className="smaller-p">this can be updated in your profile later</p>
                     </div>
                     <input type="color" value={background_color} onChange={(e) => setBackgroundColor(e.target.value)} className="align-middle"></input>
                 </div>
 
                 <div className="facechart-preference-container">
-                    <div>
+                    <div className="p-container">
                         <p>select face chart</p>
-                        <p>this can be updated in your profile later</p>
+                        <p className="smaller-p">this can be updated in your profile later</p>
                     </div>
                     <div className="face-chart-container">
                       <img src={faceChart1} style={{backgroundColor: background_color}} className={facechart === "faceChart1" ? 'selected-chart facechart' : 'facechart'} name="faceChart1" onClick={updateFace}></img>

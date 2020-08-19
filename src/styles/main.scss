@@ -2,13 +2,17 @@ $border: 2px solid white;
 $font-large: 2rem;
 $font-medium: 1.2rem;
 $font-small: .9rem;
-$theme-pink: #ff57b9;
+$theme-pink: #ff5cad;
 
 /**/ 
 // @font-face {
 //     font-family: neon;
 //     src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
 // }
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
+
+
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
@@ -24,11 +28,11 @@ $theme-pink: #ff57b9;
   
   
   .flux {
-    font-family: 'Pacifico', cursive;
-    color: #ff76c6;
+    font-family: 'Fredoka One', cursive;
+    color: $theme-pink;
     font-size: 9vw;
     line-height: 9vw;
-    text-shadow: 0 0 3vw #ff76c6;
+    text-shadow: 0 0 3vw $theme-pink;
   }
   
   
@@ -42,12 +46,12 @@ $theme-pink: #ff57b9;
 //   @keyframes flux {
 //     0%,
 //     100% {
-//       text-shadow: 0 0 1vw #ff9fe2, 0 0 1.5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 5vw #ff9fe2, 0 0 .2vw #ff9fe2, .5vw .5vw .1vw #df3799;
-//       color: #ff76c6;
+//       text-shadow: 0 0 1vw #ff2190, 0 0 1.5vw #ff42a0, 0 0 5vw #ff65b2, 0 0 5vw #ff84c2, 0 0 .2vw #ff379b, .5vw .5vw .1vw #a00f63;
+//       color: #ff55be;
 //     }
 //     50% {
-//       text-shadow: 0 0 .5vw #ff72c0, 0 0 .75vw #ff72c0, 0 0 2.5vw #ff72c0, 0 0 2.5vw #ff72c0, 0 0 .1vw #ff72c0, .5vw .5vw .1vw #7a0144;
-//       color:  #ff3aad;
+//       text-shadow: 0 0 .5vw #ff379b, 0 0 .75vw #ff379b, 0 0 2.5vw #ff379b, 0 0 2.5vw #ff379b, 0 0 .1vw #ff379b, .5vw .5vw .1vw #df3799;
+//       color: $theme-pink;
 //     }
 //   }
   
@@ -160,6 +164,15 @@ p {
     margin: 0;
 }
 
+.smaller-p {
+    font-size: .8rem;
+    font-style: italic;
+}
+
+.p-container {
+    margin: 15px 0;
+}
+
 #color-preference-container {
     margin-top: 20px;
     display: flex;
@@ -193,13 +206,14 @@ nav {
     height: 100%;
     width: 230px;
     position: fixed;
-    border-right: 2px solid #ff76c6;
+    // border-right: 2px solid $theme-pink;
     top: 0;
     left: 0;
     overflow-x: hidden;
     padding: 25px 0;
     margin: 0;
     background-color: white;
+    box-shadow: 5px 0px 5px 0px rgba(255, 92, 174, 0.781);
 }
 
 nav ul {
@@ -234,10 +248,16 @@ nav ul a:hover {
 }
 
 .logo {
-    font-family: 'Pacifico', cursive;
+    font-family: 'Fredoka One', cursive;
     font-size: 3rem;
-    color: #ff3aad;
-    text-shadow: 3px 2px 6px #ff3aad;
+    color: $theme-pink;
+    text-shadow: 3px 2px 6px #99004d, 3px 2px 6px #d6016b, 3px 2px 6px #ff0381;
+}
+
+.logo:hover {
+    text-shadow: 3px 2px 3px #99004d, 3px 2px 3px #d6016b, 3px 2px 3px #ff0381;
+
+
 }
 
 .logout {
@@ -245,7 +265,7 @@ nav ul a:hover {
 }
 
 .new-look {
-    text-shadow: 0px 0px 10px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 20px $theme-pink, 0px 0px 25px $theme-pink;
+    text-shadow: 0px 0px 10px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 20px $theme-pink, 0px 0px 25px $theme-pink;
 }
 
 /*MAIN*/
@@ -376,6 +396,10 @@ main {
     font-size: 1.3rem;
 }
 
+.color-label {
+    font-size: 1.3rem;
+}
+
 #sketch-container {
     border: $border;
     border-radius: 10px;
@@ -400,12 +424,12 @@ main {
     line-height: initial;
     height: 48px;
     border-radius: 7px;
-    border: 2px solid $theme-pink;
+    border: 2px solid white;
     background-color: black;
     color: $theme-pink;
     font-size: $font-medium;
     padding-left: 10px;
-    box-shadow: 0px 0px 6px 1px $theme-pink;
+    box-shadow: 0px 0px 6px 1px white;
     font-weight: 600;
 }
 
@@ -413,12 +437,12 @@ main {
     width: 30%;
     height: 48px;
     border-radius: 7px;
-    border: 2px solid $theme-pink;
+    border: 2px solid white;
     background-color: black;
     color: $theme-pink;
     font-size: $font-medium;
     padding-left: 10px;
-    box-shadow: 0px 0px 6px 1px $theme-pink;
+    box-shadow: 0px 0px 6px 1px white;
     font-weight: 600;
 }
 
@@ -505,7 +529,7 @@ main {
         height: 11vh;
         width: 100%;
         position: fixed;
-        border-bottom: 2px solid #ff76c6;
+        border-bottom: 2px solid $theme-pink;
         top: 0;
         left: 0;
         overflow: hidden;

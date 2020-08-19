@@ -1,7 +1,6 @@
 import React from 'react';
 import CanvasDraw from "react-canvas-draw";
-import {ChromePicker, BlockPicker, HuePicker, AlphaPicker, CompactPicker, GithubPicker} from 'react-color';
-import reactCSS from 'reactcss'
+import { HuePicker, AlphaPicker, CompactPicker } from 'react-color';
 import faceChart1 from '../images/faceChart1.png'
 import faceChart2 from '../images/faceChart2.png'
 import faceChart3 from '../images/faceChart3.png'
@@ -51,6 +50,17 @@ export default class LookForm extends React.Component {
             })
         }
     }
+
+    // componentWillUpdate() {
+    //     console.log(this.props.currentUser)
+    //     if (this.props.currentUser !== null) {
+    //         this.setState({
+    //             user_id: this.props.currentUser.id,
+    //             background_image: findFaceChart(this.props.currentUser.facechart),
+    //             background_color: this.props.currentUser.background_color
+    //         })
+    //     }
+    // }
 
     componentWillUnmount() {
         this.props.setEditing(null)
@@ -137,7 +147,6 @@ export default class LookForm extends React.Component {
     }
 
     render() {
-        console.log(this.props.editing)
         const popover = {
             position: 'absolute',
             zIndex: '2',
@@ -224,7 +233,7 @@ export default class LookForm extends React.Component {
                 <br/>
 
                 <div id="color-story-container">
-                    <p className="sketch-label">color story</p>
+                    <p className="color-label">color story</p>
                     <button id="add-swatch" onClick={ this.handleClick }>
                     <svg viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>

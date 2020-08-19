@@ -21,10 +21,7 @@ function App() {
 
 
     useEffect(() => {
-        console.log("mounted app.js")
         const token = localStorage.getItem("token")
-
-
         if (token) {
           fetch(`http://localhost:3000/auto_login`, {
             headers: {
@@ -37,10 +34,11 @@ function App() {
               fetchLooks(token, data)
             })
         }
+
     }, []);
 
     const handleLogin = (user) => {
-        setCurrentUser(user)
+        // setCurrentUser(user)
         const token = localStorage.getItem("token")
         fetchLooks(token, user)
     }
@@ -60,6 +58,7 @@ function App() {
         .then(r => r.json())
         .then(user => {
             setLooks(user.looks)
+            // setCurrentUser(user)
         })
     }
 
@@ -99,6 +98,7 @@ function App() {
 
     return ( 
     <> 
+    {console.log(currentUser, looks)}
     <BrowserRouter>
             <Nav logout={logout} showSignUpModal={showSignUpModal} showLoginModal={showLoginModal} currentUser={currentUser}/> 
             <main>
@@ -112,7 +112,7 @@ function App() {
                     <SignUp {...routeProps} show={signUpShow}
                     onHide={() => setSignUpModal(false)} handleLogin={handleLogin}/>
                     <LogIn {...routeProps} show={loginShow}
-                    onHide={() => setLoginModal(false)} handleLogin={handleLogin}/>
+                    onHide={() => setLoginModal(false)} handleLogin={handleLogin} setCurrentUser={setCurrentUser}/>
                     </>
                 }
                 </>
@@ -120,12 +120,16 @@ function App() {
             <Route
                 path="/profile"
                 render={() => (
-                <Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/>
+                <> 
+                {currentUser ? <Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/> : null}
+                </>
             )}/>
             <Route
                 path="/look"
                 render={(routeProps) => (
-                <LookForm {...routeProps} currentUser={currentUser} updateLookState={updateLookState} setLooks={setLooks} editing={editing} setEditing={setEditing}/>
+                <>
+                { currentUser ? <LookForm {...routeProps} currentUser={currentUser} updateLookState={updateLookState} setLooks={setLooks} editing={editing} setEditing={setEditing}/> : null }
+                </>
             )}/>
             <Route
                 path="/feed"
@@ -133,14 +137,9 @@ function App() {
                 <div id="feed-container">
                 <SearchBar setSearch={setSearch}/>
                 <Filter setFilter={setFilter}/>
-                <LookContainer  routeProps={routeProps} looks={searchFilterLooks()} setLooks={setLooks} updateLookState={updateLookState} handleEditing={handleEditing}/>
+                <LookContainer routeProps={routeProps} looks={searchFilterLooks()} setLooks={setLooks} updateLookState={updateLookState} handleEditing={handleEditing}/>
                 </div> 
                  )} />
-            <Route
-                path="/login"
-                render={() => (
-                <h1>LOG IN HERE</h1>
-            )}/>
             </main>
     </BrowserRouter>
     </>);

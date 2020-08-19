@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import faceChart1 from '../images/faceChart1.png'
 import faceChart2 from '../images/faceChart2.png'
 import faceChart3 from '../images/faceChart3.png'
 
 export default function Profile({ currentUser, setCurrentUser }) {
-    // const { background_color, facechart, id, username, password_digest } = currentUser
-    console.log(currentUser)
 
     const [updateStatus, setUpdateStatus] = useState(false)
     const [username, setUsername] = useState(currentUser.username)
     const [password, setPassword] = useState("")
     const [facechart, setFaceChart] = useState(currentUser.facechart)
     const [background_color, setBackgroundColor] = useState(currentUser.background_color)
+
+    // useEffect(() => {
+    //     if(currentUser === null) {
+    //         return
+    //     } else {
+    //         setUsername(currentUser.username)
+    //         setFaceChart(currentUser.facechart)
+    //         setBackgroundColor(currentUser.background_color)
+    //     }
+    // }, [currentUser]);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -45,7 +53,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
 
     return (
         <div className="profile-container">
-            {console.log(facechart)}
             <h1 id="username">{username}'s profile</h1>
             {updateStatus ? <p style={{textAlign: 'center'}}>update successful!</p> : null}
             <div>

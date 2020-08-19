@@ -1,7 +1,7 @@
 # glowlist #
 by [Aleksa](https://github.com/aleksarad) 💗
 
-![app logo](src/images/glowlist.png)
+<!-- ![app logo](src/images/glowlist.png) -->
 
 ## Overview ##
 
@@ -31,4 +31,8 @@ Backend: Ruby On Rails, Postgres DB
 * [Figma](https://www.figma.com/) - Creating mockups/prototypes for site layout and design
 * [React-Canvas-Draw](https://github.com/embiem/react-canvas-draw) - A canvas drawing library for React
 * [React-Color](https://casesandberg.github.io/react-color/) - A collection of React color pickers. Besides style and preference, the advantage of using React Color over an HTML color input is that React Color provides opacity options.
+
+## Thank you ##
+Special thank you to [Tracy Shu](https://www.linkedin.com/in/tracy-shu-07354b48/) for helping me come up with the app name 💕
+and thank you to [Anna Radevich](https://anna-radevich.herokuapp.com/) for the custom facecharts 💓
 

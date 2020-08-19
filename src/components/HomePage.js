@@ -2,8 +2,8 @@ import React from 'react';
 
 export default function Profile() {
     return (
-        <div class="neon-container">
-            <div class="flux">glowlist</div>
+        <div className="neon-container">
+            <div className="flux">glowlist</div>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import LookCard from './LookCard'
-import { useState } from 'react';
 
 export default function LookContainer({looks, setLooks, handleEditing, routeProps, updateLookState }) {
 
