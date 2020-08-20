@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function Profile() {
+export default function HomePage() {
     return (
-        <div className="neon-container">
+        <div className="centered-container">
             <div className="flux">glowlist</div>
         </div>
     )

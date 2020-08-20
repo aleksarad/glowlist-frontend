@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-export default function Login({ history, show, onHide, handleLogin, setCurrentUser }) {
+export default function Login({ history, show, onHide, handleLogin, setCurrentUser, setLogIn }) {
 
     const [error, setError] = useState(null)
     const [username, setUsername] = useState("")
@@ -32,6 +32,7 @@ export default function Login({ history, show, onHide, handleLogin, setCurrentUs
         .then(data => {
             if(data.token) {
                 setCurrentUser(data.user)
+                // setLogIn(true)
                 localStorage.setItem("token", data.token)
                 handleLogin(data.user)
                 onHide()

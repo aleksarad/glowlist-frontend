@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Link } from 'react-router-dom';
 import Nav from './components/Nav'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
@@ -9,6 +9,8 @@ import LookForm from './components/LookForm'
 import HomePage from './components/HomePage'
 import SearchBar from './components/SearchBar'
 import Filter from './components/Filter'
+import Loading from  './components/Loading'
+import FeedEmpty from  './components/FeedEmpty'
 
 function App() {
     const [signUpShow, setSignUpModal] = useState(false);
@@ -18,6 +20,7 @@ function App() {
     const [looks, setLooks] = useState([])
     const [searchTerm, setSearch] = useState("")
     const [filter, setFilter] = useState("")
+    const [loggedIn, setLogIn] = useState(false)
 
 
     useEffect(() => {
@@ -31,6 +34,7 @@ function App() {
           .then(resp => resp.json())
           .then(data => {
               setCurrentUser(data)
+              setLogIn(true)
               fetchLooks(token, data)
             })
         }
@@ -38,13 +42,15 @@ function App() {
     }, []);
 
     const handleLogin = (user) => {
-        // setCurrentUser(user)
+        // setLogIn(true)
         const token = localStorage.getItem("token")
         fetchLooks(token, user)
     }
 
     const logout = () => {
         setCurrentUser(null)
+        setLooks([])
+        setLogIn(false)
         localStorage.removeItem("token")
     }
 
@@ -123,25 +129,39 @@ function App() {
             <Route
                 path="/profile"
                 render={() => (
-                <> 
-                {currentUser ? <Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/> : null}
-                </>
+                    <> 
+                        {currentUser ? <Profile currentUser={currentUser} setCurrentUser={setCurrentUser}/> : <Loading/>}
+                    </>
             )}/>
             <Route
                 path="/look"
                 render={(routeProps) => (
-                <>
-                { currentUser ? <LookForm {...routeProps} currentUser={currentUser} updateLookState={updateLookState} setLooks={setLooks} editing={editing} setEditing={setEditing}/> : null }
-                </>
+                    <>
+                    { currentUser ? <LookForm {...routeProps}
+                    currentUser={currentUser} 
+                    updateLookState={updateLookState} 
+                    setLooks={setLooks} editing={editing}
+                    setEditing={setEditing}/> 
+                    : <Loading/> }
+                    </>
             )}/>
             <Route
                 path="/feed"
                 render={(routeProps) => (
-                <div id="feed-container">
-                <SearchBar setSearch={setSearch}/>
-                <Filter setFilter={setFilter}/>
-                <LookContainer routeProps={routeProps} looks={searchFilterLooks()} setLooks={setLooks} updateLookState={updateLookState} handleEditing={handleEditing}/>
-                </div> 
+                        <>
+                            { looks.length === 0 ? <Loading looks={looks}/> :
+                            <div id="feed-container">
+                                <SearchBar setSearch={setSearch}/>
+                                <Filter setFilter={setFilter}/>
+                                <LookContainer routeProps={routeProps}
+                                 looks={searchFilterLooks()} 
+                                 setLooks={setLooks}
+                                 updateLookState={updateLookState}
+                                 setLogIn = {setLogIn}
+                                 handleEditing={handleEditing}/>
+                            </div> 
+                            }
+                        </>
                  )} />
             </main>
     </BrowserRouter>
