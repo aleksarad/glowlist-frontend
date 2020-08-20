@@ -17,8 +17,8 @@ Glowlist allows a user to:
 
 
 ### Built With ###
-* **[Frontend]:**(https://github.com/aleksarad/glowlist-frontend) React, React Bootstrap, React Canvas Draw, Sass, React Color
-* **[Backend]:**(https://github.com/aleksarad/glowlist-backend) Ruby On Rails, Postgres DB
+* [Frontend](https://github.com/aleksarad/glowlist-frontend): React, React Bootstrap, React Canvas Draw, Sass, React Color
+* [Backend](https://github.com/aleksarad/glowlist-backend): Ruby On Rails, Postgres DB
 
 ### Features ###
 * JWT Auth
