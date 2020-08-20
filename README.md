@@ -2,7 +2,7 @@
 by [Aleksa](https://github.com/aleksarad) 💗
 
 <kbd>
-![app logo](src/images/glowlistfeed.png)
+    <img src="src/images/glowlistfeed.png">
 </kbd>
 
 ### Overview ###
