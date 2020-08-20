@@ -1,6 +1,6 @@
 import React from 'react';
 import CanvasDraw from "react-canvas-draw";
-import { HuePicker, AlphaPicker, CompactPicker } from 'react-color';
+import { HuePicker, AlphaPicker, CompactPicker, ChromePicker, SliderPicker } from 'react-color';
 import faceChart1 from '../images/faceChart1.png'
 import faceChart2 from '../images/faceChart2.png'
 import faceChart3 from '../images/faceChart3.png'
@@ -31,7 +31,6 @@ export default class LookForm extends React.Component {
         brushRadius: 5,
         lazyRadius: 0,
         background_image: findFaceChart(this.props.currentUser.facechart),
-        //this should come from users BC
         background_color: this.props.currentUser.background_color,
         displayColorPicker: false
     }
@@ -50,17 +49,6 @@ export default class LookForm extends React.Component {
             })
         }
     }
-
-    // componentWillUpdate() {
-    //     console.log(this.props.currentUser)
-    //     if (this.props.currentUser !== null) {
-    //         this.setState({
-    //             user_id: this.props.currentUser.id,
-    //             background_image: findFaceChart(this.props.currentUser.facechart),
-    //             background_color: this.props.currentUser.background_color
-    //         })
-    //     }
-    // }
 
     componentWillUnmount() {
         this.props.setEditing(null)
@@ -256,7 +244,7 @@ export default class LookForm extends React.Component {
                     </span>)}
                 </div>
                 <br/>
-                <button className="important-button" onClick={this.handleSubmit}>submit</button>
+                <button className="important-button" onClick={this.handleSubmit}>save look</button>
                 </div>
             </div> 
         )

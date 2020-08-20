@@ -8,6 +8,7 @@ export default function Filter({setFilter}) {
             </option>
             <option>complete</option>
             <option>incomplete</option>
+            <option>all</option>
         </select>
     )
 }

@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
 export default function Login({ history, show, onHide, handleLogin, setCurrentUser }) {
 
-    // useEffect()
-
+    const [error, setError] = useState(null)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
@@ -40,6 +39,7 @@ export default function Login({ history, show, onHide, handleLogin, setCurrentUs
             }
             else {
                 console.log(data)
+                setError(data.error)
             }
         })
     }
@@ -55,14 +55,12 @@ export default function Login({ history, show, onHide, handleLogin, setCurrentUs
         centered
       >
         <Modal.Header closeButton>
-          {/* <Modal.Title id="contained-modal-title-vcenter">
-            Login
-          </Modal.Title> */}
         </Modal.Header>
         <Modal.Body>
         <div className="modal-body-container">   
 
                 <h1 style={{textAlign: 'center'}}>log in</h1>
+                <p style={{textAlign: 'center', fontStyle: 'italic'}}>{error}</p>
                 <input className="underline-input" value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
                 <br/>
                 <input className="underline-input"  value={password} onChange={handlePasswordChange} type="password" placeholder="password"/>

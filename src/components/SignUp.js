@@ -4,7 +4,7 @@ import faceChart1 from '../images/faceChart1.png'
 import faceChart2 from '../images/faceChart2.png'
 import faceChart3 from '../images/faceChart3.png'
 
-export default function SignUp({ history, show, onHide, handleLogin }) {
+export default function SignUp({ history, show, onHide, handleLogin, setCurrentUser }) {
 
     const [error, setError] = useState(null)
     const [username, setUsername] = useState("")
@@ -31,6 +31,7 @@ export default function SignUp({ history, show, onHide, handleLogin }) {
       .then(resp => resp.json())
       .then(data => {
         if(data.token) {
+            setCurrentUser(data.user)
             localStorage.setItem("token", data.token)
             handleLogin(data.user)
             setError(null)
@@ -63,7 +64,7 @@ export default function SignUp({ history, show, onHide, handleLogin }) {
         <div className="modal-body-container">   
 
                 <h1 style={{textAlign: 'center'}}>create an account</h1>
-                <p style={{textAlign: 'center'}}>{error}</p>
+                <p style={{textAlign: 'center', fontStyle: 'italic'}}>{error}</p>
                 <input className="underline-input" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="username"/>
                 <br/>
                 <input className="underline-input"  value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="password"/>

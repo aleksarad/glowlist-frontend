@@ -93,6 +93,9 @@ function App() {
             if (filter === 'incomplete') {
                 filtered = filtered.filter(look => look.completed === false)
             }
+            if (filter === 'all') {
+                return filtered
+            }
             return filtered
     }
 
@@ -110,7 +113,7 @@ function App() {
                     <>
                     <HomePage />
                     <SignUp {...routeProps} show={signUpShow}
-                    onHide={() => setSignUpModal(false)} handleLogin={handleLogin}/>
+                    onHide={() => setSignUpModal(false)} handleLogin={handleLogin} setCurrentUser={setCurrentUser}/>
                     <LogIn {...routeProps} show={loginShow}
                     onHide={() => setLoginModal(false)} handleLogin={handleLogin} setCurrentUser={setCurrentUser}/>
                     </>

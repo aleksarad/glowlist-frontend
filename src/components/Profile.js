@@ -11,16 +11,6 @@ export default function Profile({ currentUser, setCurrentUser }) {
     const [facechart, setFaceChart] = useState(currentUser.facechart)
     const [background_color, setBackgroundColor] = useState(currentUser.background_color)
 
-    // useEffect(() => {
-    //     if(currentUser === null) {
-    //         return
-    //     } else {
-    //         setUsername(currentUser.username)
-    //         setFaceChart(currentUser.facechart)
-    //         setBackgroundColor(currentUser.background_color)
-    //     }
-    // }, [currentUser]);
-
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(username, password, facechart, background_color)
