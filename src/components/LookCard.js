@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import CanvasDraw from "react-canvas-draw";
+import Overlay from 'react-bootstrap/Overlay'
 
 export default function LookCard({ look, setLooks, handleEditing, history, updateLookState }) {
     useEffect(() => {

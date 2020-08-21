@@ -1,7 +1,7 @@
 # glowlist #
 by [Aleksa](https://github.com/aleksarad) 💗
 
-![app logo](src/images/glowlistfeed.png)
+![app feed](src/images/glowlistfeed1.png)
 
 ### Overview ###
 

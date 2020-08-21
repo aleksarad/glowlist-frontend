@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Redirect, Link } from 'react-router-dom';
+import jellyFish from "./images/jellyfish.png"
 import Nav from './components/Nav'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
@@ -21,6 +22,8 @@ function App() {
     const [searchTerm, setSearch] = useState("")
     const [filter, setFilter] = useState("")
     const [loggedIn, setLogIn] = useState(false)
+    const [loading, setLoading] = useState(true)
+    
 
 
     useEffect(() => {
@@ -34,7 +37,6 @@ function App() {
           .then(resp => resp.json())
           .then(data => {
               setCurrentUser(data)
-              setLogIn(true)
               fetchLooks(token, data)
             })
         }
@@ -42,7 +44,6 @@ function App() {
     }, []);
 
     const handleLogin = (user) => {
-        // setLogIn(true)
         const token = localStorage.getItem("token")
         fetchLooks(token, user)
     }
@@ -50,12 +51,13 @@ function App() {
     const logout = () => {
         setCurrentUser(null)
         setLooks([])
-        setLogIn(false)
         localStorage.removeItem("token")
     }
 
     //reused in handle login and autologin
     const fetchLooks = (token, user) => {
+        setLoading(true)
+        
         fetch(`http://localhost:3000/users/${user.id}`, {
             headers: {
               Authorization: `Bearer ${token}`
@@ -64,6 +66,7 @@ function App() {
         .then(r => r.json())
         .then(user => {
             setLooks(user.looks)
+            setLoading(false)
             // setCurrentUser(user)
         })
     }
@@ -149,17 +152,22 @@ function App() {
                 path="/feed"
                 render={(routeProps) => (
                         <>
-                            { looks.length === 0 ? <Loading looks={looks}/> :
-                            <div id="feed-container">
-                                <SearchBar setSearch={setSearch}/>
-                                <Filter setFilter={setFilter}/>
-                                <LookContainer routeProps={routeProps}
-                                 looks={searchFilterLooks()} 
-                                 setLooks={setLooks}
-                                 updateLookState={updateLookState}
-                                 setLogIn = {setLogIn}
-                                 handleEditing={handleEditing}/>
-                            </div> 
+                            { loading ? <Loading/> : 
+                            <>
+                                { looks.length === 0 ? <FeedEmpty/> :
+                                <div id="feed-container">
+                                    <SearchBar setSearch={setSearch}/>
+                                    <Filter setFilter={setFilter}/>
+                                    <LookContainer routeProps={routeProps}
+                                    looks={searchFilterLooks()} 
+                                    setLooks={setLooks}
+                                    updateLookState={updateLookState}
+                                    setLogIn = {setLogIn}
+                                    handleEditing={handleEditing}/>
+                                    {/* <img src={jellyFish} className="jellyfish"></img> */}
+                                </div> 
+                                }
+                            </>
                             }
                         </>
                  )} />

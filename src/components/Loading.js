@@ -1,7 +1,7 @@
 import React from 'react';
 import FeedEmpty from './FeedEmpty'
 
-export default function Loading({looks}) {
+export default function Loading() {
     return (
     <div className="centered-container">
         <div class="spinner">

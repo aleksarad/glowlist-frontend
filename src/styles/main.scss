@@ -3,7 +3,7 @@ $font-medium: 1.2rem;
 $font-small: .9rem;
 $theme-pink: #ff5cad;
 $white: #eeeeee;
-$black: #191919;
+$black: #1f1f1f;
 $border: 1px solid $white;
 
 /**/ 
@@ -23,34 +23,41 @@ $border: 1px solid $white;
     width: 100%;
     height: 100vh;
   }
+
+  .centered-container-horizontal {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
   
   
-  .flux {
+  .main-logo {
     font-family: 'Fredoka One', cursive;
     color: $theme-pink;
     font-size: 9vw;
     line-height: 9vw;
     text-shadow: 0 0 3vw $theme-pink;
+    animation: mainlogo 4s linear infinite;
+    -moz-animation: mainlogo 2s linear infinite;
+    -webkit-animation: mainlogo 2s linear infinite;
+    -o-animation: mainlogo 2s linear infinite;
   }
   
   
-  .flux {
-    animation: flux 4s linear infinite;
-    -moz-animation: flux 2s linear infinite;
-    -webkit-animation: flux 2s linear infinite;
-    -o-animation: flux 2s linear infinite;
-  }
   
-  @keyframes flux {
+  @keyframes mainlogo {
     0%,
     100% {
-      text-shadow: 0 0 1vw #ff2190, 0 0 1.5vw #ff42a0, 0 0 5vw #ff65b2, 0 0 5vw #ff84c2, 0 0 .2vw #ff379b, .5vw .5vw .1vw #a00f63;
-      color: #ff55be;
-    }
-    50% {
-      text-shadow: 0 0 .5vw #ff379b, 0 0 .75vw #ff379b, 0 0 2.5vw #ff379b, 0 0 2.5vw #ff379b, 0 0 .1vw #ff379b, .5vw .5vw .1vw #df3799;
+      text-shadow: 0 0 1vw #ff2190, 0 0 1.5vw #ff42a0, .5vw .5vw .1vw #a00f63;
       color: $theme-pink;
     }
+    // 50% {
+    //   text-shadow: 0 0 .5vw #ff379b, 0 0 .75vw #ff379b, 0 0 2.5vw #ff379b, 0 0 2.5vw #ff379b, 0 0 .1vw #ff379b, .5vw .5vw .1vw #df3799;
+    //   color: $theme-pink;
+    // }
   }
   
 /*universal styles*/
@@ -204,7 +211,7 @@ nav {
     overflow-x: hidden;
     padding: 25px 0;
     margin: 0;
-    background-color: white;
+    background-color: rgb(245, 245, 245);
     box-shadow: 5px 0px 5px 0px rgba(255, 92, 174, 0.781);
 }
 
@@ -410,25 +417,8 @@ main {
 
 /*FEED*/
 
-#feed-empty {
-    font-weight: 400;
-    font-size: 1.3rem;
-    text-align: center;
-}
-
-#feed-empty-link {
-    color: $white;
-    // text-shadow: 0px 0px 10px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 20px $theme-pink, 0px 0px 25px $theme-pink;
-    transition: text-shadow 200ms;
-}
-#feed-empty-link:hover {
-    text-decoration: none;
-    text-shadow: 0px 0px 10px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 20px $theme-pink, 0px 0px 25px $theme-pink, 0px 0px 30px $theme-pink, 0px 0px 35px $theme-pink;
-
-}
-
 #feed-container {
-    width: 70%;
+    width: 65%;
     margin: auto;
     padding-top: 2rem;
 }
@@ -625,7 +615,7 @@ main {
     width: 18px;
     height: 18px;
     background-color: $theme-pink;
-    box-shadow: 0px 0px 15px 4px $theme-pink;
+    box-shadow: 0px 0px 10px 2px $theme-pink;
     border-radius: 100%;
 
     display: inline-block;
@@ -657,3 +647,86 @@ main {
       transform: scale(1.0);
     }
   }
+
+/**BUBBLE**/
+.bubble {
+	position: relative;
+	background: white;
+    border-radius: 1rem;
+    padding: 1.5vw;
+    margin: 2vw;
+    font-size: $font-medium;
+    color: $theme-pink;
+    box-shadow: 0px 0px 3px 1px white;
+}
+
+.bubble a {
+    color: rgb(36, 36, 36);
+}
+
+.bubble a:hover {
+    text-decoration: none;
+    color: $theme-pink;
+}
+
+.bubble:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 22px solid transparent;
+	border-bottom-color: white;
+	border-top: 0;
+	border-left: 0;
+	margin-left: -11px;
+    margin-top: -22px;
+}
+
+/*JELLYFISH*/
+
+.jellyfish {
+    width: 6rem;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    animation: jelly 2.5s linear infinite;
+}
+
+.feed-jellyfish {
+    width: 120px;
+    filter: drop-shadow(0 0 10px $theme-pink);
+    margin-bottom: .5rem;
+    margin-right: 1rem;
+    animation: jelly 2.5s linear infinite;
+}
+
+
+.jellyfish-main {
+    width: 8vw;
+    margin-left: 1rem;
+    filter: drop-shadow(0 0 10px $theme-pink);
+    animation: jelly 2.5s linear infinite;
+}
+
+@keyframes jelly {
+    0%,
+    100% {
+        filter: drop-shadow(0 0 .5vw $theme-pink);
+        transform: rotate(0deg); 
+    }
+    75% {
+        filter: drop-shadow(0 0 .75vw $theme-pink);
+        transform: rotate(-10deg); 
+    }
+    50% {
+        filter: drop-shadow(0 0 .75vw $theme-pink);
+        transform: rotate(0deg); 
+    }
+    25% {
+        filter: drop-shadow(0 0 .5vw $theme-pink);
+        transform: rotate(10deg)
+    }
+}
