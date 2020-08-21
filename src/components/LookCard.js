@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import CanvasDraw from "react-canvas-draw";
-import Overlay from 'react-bootstrap/Overlay'
+import { Popover, OverlayTrigger, Overlay } from 'react-bootstrap/'
+// import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 
 export default function LookCard({ look, setLooks, handleEditing, history, updateLookState }) {
     useEffect(() => {
     }, 
     []);
 
-    // const  [width, setWidth] = useState(400);
-    // const  [height, setHeight] = useState(400);
 
     const deleteLook = (e) => {
         e.preventDefault()
@@ -41,6 +40,18 @@ export default function LookCard({ look, setLooks, handleEditing, history, updat
                 .then(updatedObj => updateLookState(updatedObj))
     }
 
+    const popover = (
+        <Popover id="popover-basic">
+          <Popover.Content>
+            <button className="delete-button" onClick={deleteLook}>
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                    </svg>
+            </button>
+          </Popover.Content>
+        </Popover>
+      );
+
     return (
         <div className="look-card">
 
@@ -61,12 +72,9 @@ export default function LookCard({ look, setLooks, handleEditing, history, updat
                     </span>)}
                 </div>
                 <div>
-                    <button className="delete-button" onClick={deleteLook}>
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
-                    </svg>
-                    </button>
-
+                    <OverlayTrigger trigger="click" placement="left" overlay={popover}>
+                        <span style={{fontWeight: '700', fontSize: '2.5rem', cursor: 'pointer'}} class="align-middle">...</span>
+                    </OverlayTrigger>
                     <button className="edit-button" onClick={() => {
                         handleEditing(look)
                         history.push('/look')

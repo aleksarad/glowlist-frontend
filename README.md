@@ -2,7 +2,7 @@
 by [Aleksa](https://github.com/aleksarad) 💗
 
 <kbd>
-    <img src="src/images/glowlistfeed.png">
+    <img src="src/images/glowlistfeed1.png">
 </kbd>
 
 ### Overview ###
