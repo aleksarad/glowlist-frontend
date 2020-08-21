@@ -1,7 +1,9 @@
 # glowlist #
 by [Aleksa](https://github.com/aleksarad) 💗
 
-![app feed](src/images/glowlistfeed1.png)
+<kbd>
+    <img src="src/images/glowlistfeed.png">
+</kbd>
 
 ### Overview ###
 
