@@ -26,8 +26,8 @@ export default class LookForm extends React.Component {
         colors: [],
         user_id: this.props.currentUser.id,
         color: "rgba(255,51,153,1)",
-        width: 525,
-        height: 525,
+        width: 540,
+        height: 540,
         brushRadius: 5,
         lazyRadius: 0,
         background_image: findFaceChart(this.props.currentUser.facechart),
@@ -36,6 +36,7 @@ export default class LookForm extends React.Component {
     }
 
     componentDidMount() {
+        window.addEventListener('resize', this.onResize);
         const editing = this.props.editing
         if (editing !== null) {
             this.setState({
@@ -48,10 +49,123 @@ export default class LookForm extends React.Component {
                 background_color: editing.background_color
             })
         }
+
+        //this is reusblable, store in function!
+        if(window.innerWidth < 768) {
+            this.setState({
+                height: 400,
+                width: 400,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
+        if(window.innerWidth > 786 && window.innerWidth < 992) {
+            this.setState({
+                height: 500,
+                width: 500,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
+        if(window.innerWidth > 992 && window.innerWidth < 1200) {
+            this.setState({
+                height: 425,
+                width: 425,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
+        if(window.innerWidth > 1200 && window.innerWidth < 1440) {
+            //my laptop
+            this.setState({
+                height: 540,
+                width: 540,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
+        if(window.innerWidth > 1440) {
+            this.setState({
+                height: 600,
+                width: 600,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
     }
 
     componentWillUnmount() {
         this.props.setEditing(null)
+        window.removeEventListener('resize', this.onResize);
+    }
+
+    //this is programmatic responsiveness, that reloads the canvas save data on resize,
+    //it is not an ideal solution, but this was not achievable with pure CSS as the drawing data
+    //itself would not reload and would therefore be skewed from the rest of the canvas
+    onResize = (event) => {
+        const editing = this.props.editing
+
+        if(window.innerWidth < 768) {
+            this.setState({
+                height: 400,
+                width: 400,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
+        if(window.innerWidth > 786 && window.innerWidth < 992) {
+            this.setState({
+                height: 500,
+                width: 500,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
+        if(window.innerWidth > 992 && window.innerWidth < 1200) {
+            this.setState({
+                height: 425,
+                width: 425,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
+        if(window.innerWidth > 1200 && window.innerWidth < 1440) {
+            //my laptop
+            this.setState({
+                height: 540,
+                width: 540,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
+        if(window.innerWidth > 1440) {
+            this.setState({
+                height: 600,
+                width: 600,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
     }
 
     handleInput = (e) => {
@@ -147,7 +261,7 @@ export default class LookForm extends React.Component {
             left: '0px',
           }
 
-          console.log(this.state.colors)
+        //   console.log(this.saveableCanvas)
         return (
             <div id="look-form-container">
                 <div id="look-form">
@@ -200,6 +314,7 @@ export default class LookForm extends React.Component {
                         canvasWidth={this.state.width}
                         canvasHeight={this.state.height}
                         imgSrc={this.state.background_image}
+                        // ref={canvasDraw => (this.loadableCanvas = canvasDraw)}
                         // backgroundColor={this.state.background_color}
                         saveData={this.props.editing !== null
                         ? JSON.stringify(this.props.editing.sketch)

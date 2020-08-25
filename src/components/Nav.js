@@ -16,9 +16,9 @@ function Nav({ showSignUpModal, showLoginModal, logout, history, currentUser }) 
                         <li>
                             <Link className="logo" to='/feed'>glowlist</Link>
                         </li>
-                        <li>
+                        <li id="newlook-profile-container">
                             <Link to='/look' className="new-look">new look</Link> <br/>
-                            <Link to='/profile'>profile</Link> 
+                            <Link to='/profile' id="profile-link">profile</Link> 
                         </li>
                         <li>
                         <button className="link-button logout" onClick={handleLogout}>
