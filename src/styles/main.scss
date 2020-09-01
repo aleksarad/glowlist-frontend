@@ -176,7 +176,8 @@ p {
 }
 
 .facechart {
-    width: 30%;
+    width: 13vw;
+    height: 13vw;
     border-radius: 3%;
     cursor: pointer;
 }
@@ -703,6 +704,7 @@ main {
 }
 
 @media (max-width: 992px) { 
+
     nav {
         height: 11vh;
         width: 100%;
@@ -787,6 +789,10 @@ main {
 
     .look-description {
         font-size: 1rem;
+    }
+
+    .profile-container {
+        width: 90%;
     }
 } 
 

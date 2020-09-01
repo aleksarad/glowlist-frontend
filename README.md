@@ -1,6 +1,8 @@
 # glowlist #
 by [Aleksa](https://github.com/aleksarad) 💗
 
+Live at: [glowlist.netlify.app](https://glowlist.netlify.app/)
+
 <kbd>
     <img src="src/images/glowlistfeed1.png">
 </kbd>
@@ -20,13 +22,14 @@ Glowlist allows a user to:
 
 ### Built With ###
 * [Frontend](https://github.com/aleksarad/glowlist-frontend): React, React Bootstrap, React Canvas Draw, Sass, React Color
-* [Backend](https://github.com/aleksarad/glowlist-backend): Ruby On Rails, Postgres DB
+* [Backend](https://github.com/aleksarad/glowlist-backend): Ruby On Rails, PostgreSQL
 
 ### Features ###
 * JWT Auth
 * User account customization
 
 ### Improvements & Challenges ###
+* Mobile Layout: While the media queries for mobile browsers render correctly in Chrome DevTools - the app's mobile appearance on an actual mobile device post deployment is less than ideal. Will be reworking how the app looks on smaller devices.
 * Canvas responsiveness
 * Would like to add different drawing brushes
 

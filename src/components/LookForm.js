@@ -5,14 +5,21 @@ import faceChart1 from '../images/facechart1.png'
 import faceChart2 from '../images/facechart2.png'
 import faceChart3 from '../images/facechart3.png'
 
+//the reason .toLowerCase has been added to all values is
+//case sensitivity with using netlify on deployment
+//previously all file names were mixed-case, and now they are lowercase
+//making the variable names and file names inconsistent in case
+//I intend to update the naming convention across my app, but for the purpose of
+//debugging deployment, this is the current solution
+
 const findFaceChart = (faceChart) => {
-    if(faceChart.includes("faceChart1")) {
+    if(faceChart.toLowerCase().includes("faceChart1".toLowerCase())) {
         return faceChart1
     }
-    else if(faceChart.includes("faceChart2")) {
+    else if(faceChart.toLowerCase().includes("faceChart2".toLowerCase())) {
         return faceChart2
     }
-    else if(faceChart.includes("faceChart3")) {
+    else if(faceChart.toLowerCase().includes("faceChart3".toLowerCase())) {
         return faceChart3
     }
 }
