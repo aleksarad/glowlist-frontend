@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import faceChart1 from '../images/faceChart1.png'
-import faceChart2 from '../images/faceChart2.png'
-import faceChart3 from '../images/faceChart3.png'
+import faceChart1 from '../images/facechart1.png'
+import faceChart2 from '../images/facechart2.png'
+import faceChart3 from '../images/facechart3.png'
 
 export default function SignUp({ history, show, onHide, handleLogin, setCurrentUser }) {
 
