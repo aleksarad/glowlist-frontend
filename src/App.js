@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Redirect, Link } from 'react-router-dom';
-import jellyFish from "./images/jellyfish.png"
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Nav from './components/Nav'
 import SignUp from './components/SignUp'
 import LogIn from './components/LogIn'
@@ -21,7 +20,6 @@ function App() {
     const [looks, setLooks] = useState([])
     const [searchTerm, setSearch] = useState("")
     const [filter, setFilter] = useState("")
-    const [loggedIn, setLogIn] = useState(false)
     const [loading, setLoading] = useState(true)
     
 
@@ -67,7 +65,6 @@ function App() {
         .then(user => {
             setLooks(user.looks)
             setLoading(false)
-            // setCurrentUser(user)
         })
     }
 
@@ -110,7 +107,7 @@ function App() {
 
     return ( 
     <> 
-    {console.log(currentUser, looks)}
+    {console.log(currentUser)}
     <BrowserRouter>
             <Nav logout={logout} showSignUpModal={showSignUpModal} showLoginModal={showLoginModal} currentUser={currentUser}/> 
             <main>
@@ -140,12 +137,11 @@ function App() {
                 path="/look"
                 render={(routeProps) => (
                     <>
-                    { currentUser ? <LookForm {...routeProps}
+                    { loading ? <Loading/> : <LookForm {...routeProps}
                     currentUser={currentUser} 
                     updateLookState={updateLookState} 
                     setLooks={setLooks} editing={editing}
-                    setEditing={setEditing}/> 
-                    : <Loading/> }
+                    setEditing={setEditing}/> }
                     </>
             )}/>
             <Route
@@ -162,9 +158,7 @@ function App() {
                                     looks={searchFilterLooks()} 
                                     setLooks={setLooks}
                                     updateLookState={updateLookState}
-                                    setLogIn = {setLogIn}
                                     handleEditing={handleEditing}/>
-                                    {/* <img src={jellyFish} className="jellyfish"></img> */}
                                 </div> 
                                 }
                             </>

@@ -6,59 +6,42 @@ $white: #eeeeee;
 $black: #1f1f1f;
 $border: 1px solid $white;
 
-/**/ 
+/*FONTS*/
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
-
-
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/*HomePage Centered Logo*/
   
-  .centered-container {
+.centered-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100vh;
-  }
+}
 
-  .centered-container-horizontal {
+.centered-container-horizontal {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100vh;
-  }
-  
-  
-  .main-logo {
+}
+
+
+.main-logo {
     font-family: 'Fredoka One', cursive;
     color: $theme-pink;
     font-size: 9vw;
     line-height: 9vw;
-    text-shadow: 0 0 3vw $theme-pink;
+    text-shadow: 0 0 1vw #ff2190, 0 0 1.5vw #ff42a0, .5vw .5vw .1vw #a00f63;
     animation: mainlogo 4s linear infinite;
     -moz-animation: mainlogo 2s linear infinite;
     -webkit-animation: mainlogo 2s linear infinite;
     -o-animation: mainlogo 2s linear infinite;
-  }
-  
-  
-  
-  @keyframes mainlogo {
-    0%,
-    100% {
-      text-shadow: 0 0 1vw #ff2190, 0 0 1.5vw #ff42a0, .5vw .5vw .1vw #a00f63;
-      color: $theme-pink;
-    }
-    // 50% {
-    //   text-shadow: 0 0 .5vw #ff379b, 0 0 .75vw #ff379b, 0 0 2.5vw #ff379b, 0 0 2.5vw #ff379b, 0 0 .1vw #ff379b, .5vw .5vw .1vw #df3799;
-    //   color: $theme-pink;
-    // }
-  }
+}
   
 /*universal styles*/
 
@@ -97,7 +80,11 @@ body {
     box-shadow: 0px 0px 10px 2px $white, 0px 0px 15px 4px $theme-pink;
 }
 
-/*SIGN UP MODAL*/
+
+
+//***********************************//
+//********** SIGN UP MODAL **********//
+//***********************************//
 
 .modal-header {
     border: none;
@@ -190,7 +177,6 @@ p {
 
 .facechart {
     width: 30%;
-    // height: 50%;
     border-radius: 3%;
     cursor: pointer;
 }
@@ -200,12 +186,14 @@ p {
 }
 
 
-/*NAV*/
+//**********************************//
+//**********     NAV      **********//
+//**********************************//
+
 nav {
     height: 100%;
     width: 230px;
     position: fixed;
-    // border-right: 2px solid $theme-pink;
     top: 0;
     left: 0;
     overflow-x: hidden;
@@ -267,19 +255,26 @@ nav ul a:hover {
     text-shadow: 0px 0px 10px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 20px $theme-pink, 0px 0px 25px $theme-pink;
 }
 
-/*MAIN*/
+
+//**********************************//
+//**********     MAIN     **********//
+//**********************************//
+
 main {
     margin-left: 230px;
     // padding: 20px;
     z-index: 20;
 }
 
-/*LOOK FORM */
+
+
+//**********************************//
+//**********  LOOK FORM  **********//
+//**********************************//
 
 #look-form-container {
     border: $border;
     padding: 30px;
-    // z-index: 3000;
     overflow: hidden;
     width: 70%;
     margin: 3rem auto;
@@ -292,12 +287,6 @@ main {
     width: 70%;
     margin: 0 auto;
 }
-
-
-// .form-canvas-container, .form-canvas-container canvas {
-//     border-radius: 10px;
-// }
-
 
 .form-canvas-container {
     margin: 0 auto;
@@ -344,11 +333,8 @@ main {
 
 .color-picker {
     width: 98.5% !important;
-    // height: 30px;
     margin: 7px auto !important;
     border-radius: 3px;
-    // height: 25px !important;
-    // display: inline-block;
 }
 
 
@@ -364,7 +350,6 @@ main {
 #clear-undo-container button {
     background: none!important;
     border: none;
-    // padding: 0!important;
     background-color: $black;
 }
 
@@ -407,7 +392,10 @@ main {
     justify-content: space-between;
 }
 
-/*FEED*/
+
+//**********************************//
+//**********     FEED     **********//
+//**********************************//
 
 #feed-container {
     width: 65%;
@@ -446,10 +434,13 @@ main {
     color: $theme-pink;
 }
 
-/*LOOK CARD*/
+
+
+//**********************************//
+//**********  LOOK FORM  **********//
+//**********************************//
 
 .look-card {
-    // overflow: hidden;
     border: $border;
     margin: 3rem 0;
     border-radius: 10px;
@@ -457,9 +448,6 @@ main {
     display: flex;
     justify-content: space-between;
     box-shadow: 0px 0px 6px 1px $white;
-    // -webkit-box-shadow: 0px 0px 13px 2px rgba(255,58,173,1);
-    // -moz-box-shadow: 0px 0px 13px 2px rgba(255,58,173,1);
-    // box-shadow: 0px 0px 13px 2px rgba(255,58,173,1);
 }
 
 .look-name {
@@ -470,6 +458,7 @@ main {
     font-size: $font-medium;
     line-height: 1.2;
     margin: 1rem 1rem 1rem 0;
+    overflow: scroll;
 }
 
 .left-column, .right-column  {
@@ -478,17 +467,10 @@ main {
     justify-content: space-between;
 }
 
-// .right-column {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-// }
-
 .mark-completed {
     font-size: $font-medium;
     text-align: right;
     margin-top: 10px;
-    // align-self: center;
 }
 
 .mark-completed svg {
@@ -534,11 +516,189 @@ main {
     border: none;
 }
 
-/*MEDIA QUERY*/
+
+
+/*PROFILE*/
+
+.profile-container {
+    width: 50%;
+    margin: 0 auto;
+    font-size: $font-medium;
+}
+
+.profile-container .underline-input {
+    width: 100%;
+}
+
+#profile-background-selector {
+    display: flex;
+    justify-content: space-between;
+}
+
+#profile-background-selector p {
+    align-self: center;
+}
+
+.profile-container #button-container {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.profile-container * {
+    margin: 7px 0;
+}
+
+#username {
+    margin: 7rem 0 3rem 0;
+    text-shadow: 0px 0px 10px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 20px $theme-pink, 0px 0px 25px $theme-pink;
+}
+
+
+//**********************************//
+//***********   LOADER   ***********//
+//**********************************//
+
+.spinner {
+    width: 70px;
+    text-align: center;
+  }
+  
+  .spinner > div {
+    width: 18px;
+    height: 18px;
+    background-color: $theme-pink;
+    box-shadow: 0px 0px 10px 2px $theme-pink;
+    border-radius: 100%;
+
+    display: inline-block;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+  
+  .spinner .bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+  
+  .spinner .bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+  
+  @-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% { -webkit-transform: scale(0) }
+    40% { -webkit-transform: scale(1.0) }
+  }
+  
+  @keyframes sk-bouncedelay {
+    0%, 80%, 100% { 
+      -webkit-transform: scale(0);
+      transform: scale(0);
+    } 40% { 
+      -webkit-transform: scale(1.0);
+      transform: scale(1.0);
+    }
+  }
+
+
+
+//**********************************//
+//********  SPEECH BUBBLE  ********//
+//**********************************//
+
+.bubble {
+	position: relative;
+	background: white;
+    border-radius: 1rem;
+    padding: 1.5vw;
+    margin: 2vw;
+    font-size: $font-medium;
+    color: $theme-pink;
+    box-shadow: 0px 0px 3px 1px white;
+}
+
+.bubble a {
+    color: rgb(36, 36, 36);
+}
+
+.bubble a:hover {
+    text-decoration: none;
+    color: $theme-pink;
+}
+
+.bubble:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 22px solid transparent;
+	border-bottom-color: white;
+	border-top: 0;
+	border-left: 0;
+	margin-left: -11px;
+    margin-top: -22px;
+}
+
+//**********************************//
+//******  JELLYFISH ANIMATION ******//
+//**********************************//
+
+.jellyfish {
+    width: 6rem;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    animation: jelly 2.5s linear infinite;
+}
+
+.feed-jellyfish {
+    width: 120px;
+    filter: drop-shadow(0 0 10px $theme-pink);
+    margin-bottom: .5rem;
+    margin-right: 1rem;
+    animation: jelly 2.5s linear infinite;
+}
+
+
+.jellyfish-main {
+    width: 8vw;
+    margin-left: 1rem;
+    filter: drop-shadow(0 0 10px $theme-pink);
+    animation: jelly 2.5s linear infinite;
+}
+
+@keyframes jelly {
+    0%,
+    100% {
+        filter: drop-shadow(0 0 .5vw $theme-pink);
+        transform: rotate(0deg); 
+    }
+    75% {
+        filter: drop-shadow(0 0 .75vw $theme-pink);
+        transform: rotate(-10deg); 
+    }
+    50% {
+        filter: drop-shadow(0 0 .75vw $theme-pink);
+        transform: rotate(0deg); 
+    }
+    25% {
+        filter: drop-shadow(0 0 .5vw $theme-pink);
+        transform: rotate(10deg)
+    }
+}
+
+
+//**********************************//
+//********* MEDIA QUERIES *********//
+//**********************************//
 
 @media (max-width: 1440px) {
+
     #feed-container {
-        width: 700px;
+        width: 720px;
     }
 }
 
@@ -554,6 +714,10 @@ main {
         padding: 20px;
         margin: 0;
         z-index: 3000
+    }
+
+    .main-logo {
+        font-size: 13vw;
     }
 
     #newlook-profile-container {
@@ -600,7 +764,8 @@ main {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+
 
     /*LOOK FORM MEDIA*/
     #look-form-container {
@@ -625,6 +790,38 @@ main {
     }
 } 
 
+@media (max-width: 425px) {
+    .main-logo {
+        font-size: 20vw;
+    }
+
+    #look-form-container {
+        width: 100%;
+    }
+    
+    #look-form {
+        width: 100%;
+    }
+
+    nav {
+        padding: 10px;
+    }
+
+    .logo {
+        font-size: 1.9rem;
+        margin: 0;
+    }
+
+    nav ul {
+        font-size: .9rem;
+    }
+
+    
+    .link-button {
+        font-size: .7rem;
+    }
+}
+
 @media (min-width: 1441px) {
     .look-description {
         font-size: 2rem;
@@ -633,166 +830,13 @@ main {
     #feed-container {
         width: 1200px;
     }
-}
 
-/*PROFILE*/
-
-.profile-container {
-    width: 50%;
-    margin: 0 auto;
-    font-size: $font-medium;
-}
-
-.profile-container .underline-input {
-    width: 100%;
-}
-
-#profile-background-selector {
-    display: flex;
-    justify-content: space-between;
-}
-
-#profile-background-selector p {
-    align-self: center;
-}
-
-.profile-container #button-container {
-    text-align: center;
-    margin-top: 2.5rem;
-}
-
-.profile-container * {
-    margin: 7px 0;
-}
-
-#username {
-    margin: 7rem 0 3rem 0;
-    text-shadow: 0px 0px 10px $theme-pink, 0px 0px 15px $theme-pink, 0px 0px 20px $theme-pink, 0px 0px 25px $theme-pink;
-}
-
-/*LOAD*/ 
-
-.spinner {
-    width: 70px;
-    text-align: center;
-  }
-  
-  .spinner > div {
-    width: 18px;
-    height: 18px;
-    background-color: $theme-pink;
-    box-shadow: 0px 0px 10px 2px $theme-pink;
-    border-radius: 100%;
-
-    display: inline-block;
-    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-  }
-  
-  .spinner .bounce1 {
-    -webkit-animation-delay: -0.32s;
-    animation-delay: -0.32s;
-  }
-  
-  .spinner .bounce2 {
-    -webkit-animation-delay: -0.16s;
-    animation-delay: -0.16s;
-  }
-  
-  @-webkit-keyframes sk-bouncedelay {
-    0%, 80%, 100% { -webkit-transform: scale(0) }
-    40% { -webkit-transform: scale(1.0) }
-  }
-  
-  @keyframes sk-bouncedelay {
-    0%, 80%, 100% { 
-      -webkit-transform: scale(0);
-      transform: scale(0);
-    } 40% { 
-      -webkit-transform: scale(1.0);
-      transform: scale(1.0);
+    #look-form-container {
+        width: 60%;
+        margin: 1rem auto;
     }
-  }
 
-/**BUBBLE**/
-.bubble {
-	position: relative;
-	background: white;
-    border-radius: 1rem;
-    padding: 1.5vw;
-    margin: 2vw;
-    font-size: $font-medium;
-    color: $theme-pink;
-    box-shadow: 0px 0px 3px 1px white;
-}
-
-.bubble a {
-    color: rgb(36, 36, 36);
-}
-
-.bubble a:hover {
-    text-decoration: none;
-    color: $theme-pink;
-}
-
-.bubble:after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 22px solid transparent;
-	border-bottom-color: white;
-	border-top: 0;
-	border-left: 0;
-	margin-left: -11px;
-    margin-top: -22px;
-}
-
-/*JELLYFISH*/
-
-.jellyfish {
-    width: 6rem;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    animation: jelly 2.5s linear infinite;
-}
-
-.feed-jellyfish {
-    width: 120px;
-    filter: drop-shadow(0 0 10px $theme-pink);
-    margin-bottom: .5rem;
-    margin-right: 1rem;
-    animation: jelly 2.5s linear infinite;
-}
-
-
-.jellyfish-main {
-    width: 8vw;
-    margin-left: 1rem;
-    filter: drop-shadow(0 0 10px $theme-pink);
-    animation: jelly 2.5s linear infinite;
-}
-
-@keyframes jelly {
-    0%,
-    100% {
-        filter: drop-shadow(0 0 .5vw $theme-pink);
-        transform: rotate(0deg); 
-    }
-    75% {
-        filter: drop-shadow(0 0 .75vw $theme-pink);
-        transform: rotate(-10deg); 
-    }
-    50% {
-        filter: drop-shadow(0 0 .75vw $theme-pink);
-        transform: rotate(0deg); 
-    }
-    25% {
-        filter: drop-shadow(0 0 .5vw $theme-pink);
-        transform: rotate(10deg)
+    #look-form {
+        width: 600px;
     }
 }

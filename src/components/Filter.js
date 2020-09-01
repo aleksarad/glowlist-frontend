@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function Filter({setFilter}) {
+    //reset filter
+    useEffect(() => {
+        setFilter("")
+    }, []);
+
     return (
         <select id="filter" onChange={e => setFilter(e.target.value)}>
             <option disabled="disabled" selected="selected">

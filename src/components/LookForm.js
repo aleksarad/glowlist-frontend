@@ -32,7 +32,8 @@ export default class LookForm extends React.Component {
         lazyRadius: 0,
         background_image: findFaceChart(this.props.currentUser.facechart),
         background_color: this.props.currentUser.background_color,
-        displayColorPicker: false
+        displayColorPicker: false,
+        error: []
     }
 
     componentDidMount() {
@@ -49,59 +50,7 @@ export default class LookForm extends React.Component {
                 background_color: editing.background_color
             })
         }
-
-        //this is reusblable, store in function!
-        if(window.innerWidth < 768) {
-            this.setState({
-                height: 400,
-                width: 400,
-            })
-            if (editing !== null) {
-                this.saveableCanvas.loadSaveData(
-                    JSON.stringify(this.props.editing.sketch)
-            )}
-        }
-        if(window.innerWidth > 786 && window.innerWidth < 992) {
-            this.setState({
-                height: 500,
-                width: 500,
-            })
-            if (editing !== null) {
-                this.saveableCanvas.loadSaveData(
-                    JSON.stringify(this.props.editing.sketch)
-            )}
-        }
-        if(window.innerWidth > 992 && window.innerWidth < 1200) {
-            this.setState({
-                height: 425,
-                width: 425,
-            })
-            if (editing !== null) {
-                this.saveableCanvas.loadSaveData(
-                    JSON.stringify(this.props.editing.sketch)
-            )}
-        }
-        if(window.innerWidth > 1200 && window.innerWidth < 1440) {
-            //my laptop
-            this.setState({
-                height: 540,
-                width: 540,
-            })
-            if (editing !== null) {
-                this.saveableCanvas.loadSaveData(
-                    JSON.stringify(this.props.editing.sketch)
-            )}
-        }
-        if(window.innerWidth > 1440) {
-            this.setState({
-                height: 600,
-                width: 600,
-            })
-            if (editing !== null) {
-                this.saveableCanvas.loadSaveData(
-                    JSON.stringify(this.props.editing.sketch)
-            )}
-        }
+        this.responsiveDimensions()
     }
 
     componentWillUnmount() {
@@ -109,13 +58,27 @@ export default class LookForm extends React.Component {
         window.removeEventListener('resize', this.onResize);
     }
 
-    //this is programmatic responsiveness, that reloads the canvas save data on resize,
+    //this is programmatic responsiveness that reloads the canvas save data on resize,
     //it is not an ideal solution, but this was not achievable with pure CSS as the drawing data
     //itself would not reload and would therefore be skewed from the rest of the canvas
     onResize = (event) => {
+        this.responsiveDimensions()
+    }
+
+    responsiveDimensions = () => {
         const editing = this.props.editing
 
-        if(window.innerWidth < 768) {
+        if(window.innerWidth < 425) {
+            this.setState({
+                height: 300,
+                width: 300,
+            })
+            if (editing !== null) {
+                this.saveableCanvas.loadSaveData(
+                    JSON.stringify(this.props.editing.sketch)
+            )}
+        }
+        if(window.innerWidth > 425 && window.innerWidth < 768) {
             this.setState({
                 height: 400,
                 width: 400,
@@ -212,7 +175,7 @@ export default class LookForm extends React.Component {
         const editing = this.props.editing
 
         if (editing !== null) {
-            console.log("editing")
+            //edit existing look
             fetch(`http://localhost:3000/looks/${editing.id}`, {
                 method: 'PATCH',
                 headers: {
@@ -223,9 +186,20 @@ export default class LookForm extends React.Component {
                     body: JSON.stringify(this.state)
                 })
                 .then(r => r.json())
-                .then(edit => this.props.updateLookState(edit))
+                .then(edit => {
+                    if(!edit.error) {
+                        this.props.updateLookState(edit)
+                        this.saveableCanvas.clear()
+                        this.props.history.push('/feed')
+                    }
+                    else {
+                        console.log(edit)
+                        this.setState({error: edit.error})
+                        return
+                    }
+                })
         } else {
-            console.log("new")
+            //create new look
             fetch('http://localhost:3000/looks', {
                 method: 'POST',
                 headers: {
@@ -237,18 +211,29 @@ export default class LookForm extends React.Component {
                 })
                 .then(r => r.json())
                 .then(newLook => {
-                    console.log(newLook)
-                    this.props.setLooks(prevLooks => [
+                    if(!newLook.error) {
+                        this.props.setLooks(prevLooks => [
                             newLook, ...prevLooks
                         ])
+                        this.saveableCanvas.clear()
+                        this.props.history.push('/feed')
+                    }
+                    else {
+                        console.log(newLook)
+                        this.setState({error: newLook.error})
+                    }
                 })
         }
+    }
 
-        this.saveableCanvas.clear()
-        this.props.history.push('/feed')
+    errorRender = () => {
+        return (
+            this.state.error.map(err => <p style={{textAlign: 'center', fontStyle: 'italic'}}>{err}</p>)
+        )
     }
 
     render() {
+
         const popover = {
             position: 'absolute',
             zIndex: '2',
@@ -261,7 +246,7 @@ export default class LookForm extends React.Component {
             left: '0px',
           }
 
-        //   console.log(this.saveableCanvas)
+          console.log(this.props.currentUser)
         return (
             <div id="look-form-container">
                 <div id="look-form">
@@ -271,7 +256,7 @@ export default class LookForm extends React.Component {
                     value={this.state.name}
                     onChange={this.handleInput}
                     name="name"
-                    placeholder="look name"></input>
+                    placeholder="look name" required></input>
                     <br/>
                 <textarea
                     className="description top-input"
@@ -358,6 +343,8 @@ export default class LookForm extends React.Component {
                     height: '50px', width: '50px', display: 'inline-block'}}>
                     </span>)}
                 </div>
+                <br/>
+                {this.errorRender()}
                 <br/>
                 <button className="important-button" onClick={this.handleSubmit}>save look</button>
                 </div>

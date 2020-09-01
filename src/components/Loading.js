@@ -1,5 +1,4 @@
 import React from 'react';
-import FeedEmpty from './FeedEmpty'
 
 export default function Loading() {
     return (

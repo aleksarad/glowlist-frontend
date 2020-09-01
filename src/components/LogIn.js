@@ -32,7 +32,6 @@ export default function Login({ history, show, onHide, handleLogin, setCurrentUs
         .then(data => {
             if(data.token) {
                 setCurrentUser(data.user)
-                // setLogIn(true)
                 localStorage.setItem("token", data.token)
                 handleLogin(data.user)
                 onHide()
