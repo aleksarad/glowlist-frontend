@@ -176,7 +176,7 @@ export default class LookForm extends React.Component {
 
         if (editing !== null) {
             //edit existing look
-            fetch(`http://localhost:3000/looks/${editing.id}`, {
+            fetch(`https://glowlist-api.herokuapp.com/looks/${editing.id}`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",
@@ -200,7 +200,7 @@ export default class LookForm extends React.Component {
                 })
         } else {
             //create new look
-            fetch('http://localhost:3000/looks', {
+            fetch('https://glowlist-api.herokuapp.com/looks', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

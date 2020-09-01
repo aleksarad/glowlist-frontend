@@ -70,7 +70,7 @@ export default class LookCard extends React.Component {
         e.preventDefault()
         const token = localStorage.getItem("token")
         
-        fetch(`http://localhost:3000/looks/${this.props.look.id}`, {
+        fetch(`https://glowlist-api.herokuapp.com/looks/${this.props.look.id}`, {
           method: 'DELETE',
           headers: {
             "Authorization": `Bearer ${token}`
@@ -84,7 +84,7 @@ export default class LookCard extends React.Component {
         e.preventDefault()
         const token = localStorage.getItem("token")
 
-        fetch(`http://localhost:3000/looks/${this.props.look.id}`, {
+        fetch(`https://glowlist-api.herokuapp.com/looks/${this.props.look.id}`, {
                 method: 'PATCH',
                 headers: {
                     "Content-Type": "application/json",

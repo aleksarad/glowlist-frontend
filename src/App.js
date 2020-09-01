@@ -27,7 +27,7 @@ function App() {
     useEffect(() => {
         const token = localStorage.getItem("token")
         if (token) {
-          fetch(`http://localhost:3000/auto_login`, {
+          fetch(`https://glowlist-api.herokuapp.com/auto_login`, {
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -56,7 +56,7 @@ function App() {
     const fetchLooks = (token, user) => {
         setLoading(true)
         
-        fetch(`http://localhost:3000/users/${user.id}`, {
+        fetch(`https://glowlist-api.herokuapp.com/users/${user.id}`, {
             headers: {
               Authorization: `Bearer ${token}`
             }

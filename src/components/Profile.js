@@ -17,7 +17,7 @@ export default function Profile({ currentUser, setCurrentUser }) {
         console.log(username, password, facechart, background_color)
         const token = localStorage.getItem("token")
 
-        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+        fetch(`https://glowlist-api.herokuapp.com/users/${currentUser.id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",

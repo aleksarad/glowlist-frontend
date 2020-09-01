@@ -15,7 +15,7 @@ export default function SignUp({ history, show, onHide, handleLogin, setCurrentU
 
     const handleSubmit = (evt) => {
       evt.preventDefault()
-      fetch(`http://localhost:3000/users`, {
+      fetch(`https://glowlist-api.herokuapp.com/users`, {
           method: "POST",
           headers: {
               "Content-Type": "application/json",
