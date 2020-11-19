@@ -30,6 +30,13 @@ $border: 1px solid $white;
     height: 100vh;
 }
 
+#github-bubble-container {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+}
+
 
 .main-logo {
     font-family: 'Fredoka One', cursive;
@@ -652,7 +659,7 @@ main {
 }
 
 //**********************************//
-//********  SPEECH BUBBLE  ********//
+//********  SPEECH BUBBLES ********//
 //**********************************//
 
 .bubble {
@@ -664,15 +671,15 @@ main {
     font-size: $font-medium;
     color: $theme-pink;
     box-shadow: 0px 0px 3px 1px white;
-}
 
-.bubble a {
-    color: rgb(36, 36, 36);
-}
-
-.bubble a:hover {
-    text-decoration: none;
-    color: $theme-pink;
+    a {
+        color: rgb(36, 36, 36);
+    }
+    
+    a:hover {
+        text-decoration: none;
+        color: $theme-pink;
+    }
 }
 
 .bubble:after {
@@ -690,6 +697,42 @@ main {
     margin-top: -22px;
 }
 
+.github-bubble {
+    position: relative;
+    background: #ffffff;
+    color: $black;
+    box-shadow: 0px 0px 3px 1px white;
+    font-size: .94rem;
+    line-height: 16px;
+    text-align: center;
+    width: 120px;
+    height: 50px;
+    border-radius: .7rem;
+    padding-top: 10px;
+
+    a {
+        color: $theme-pink;
+        font-weight: 500;
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+}
+.github-bubble:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    z-index: 1;
+    border-style: solid;
+    border-width: 8px 0 0 12px;
+    border-color: transparent transparent transparent #ffffff;
+    top: 53%;
+    right: -12px;
+    margin-top: -4px;
+}
+
 //**********************************//
 //******  JELLYFISH ANIMATION ******//
 //**********************************//
@@ -697,9 +740,6 @@ main {
 .jellyfish {
     width: 6rem;
     padding: 1rem;
-    position: fixed;
-    bottom: 0;
-    right: 0;
     animation: jelly 2.5s linear infinite;
 }
 
