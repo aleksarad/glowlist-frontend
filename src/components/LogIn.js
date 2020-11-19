@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import SmallLoader from './SmallLoader';
 
 export default function Login({ history, show, onHide, handleLogin, setCurrentUser, setLogIn }) {
 
     const [error, setError] = useState(null)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const handleUsernameChange = (evt) => {
         setUsername(evt.target.value)
@@ -17,6 +19,7 @@ export default function Login({ history, show, onHide, handleLogin, setCurrentUs
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
         fetch(`https://glowlist-api.herokuapp.com/login`, {
             method: "POST",
             headers: {
@@ -30,6 +33,7 @@ export default function Login({ history, show, onHide, handleLogin, setCurrentUs
         })
         .then(r => r.json())
         .then(data => {
+            setLoading(false)
             if(data.token) {
                 setCurrentUser(data.user)
                 localStorage.setItem("token", data.token)
@@ -58,8 +62,8 @@ export default function Login({ history, show, onHide, handleLogin, setCurrentUs
         </Modal.Header>
         <Modal.Body>
         <div className="modal-body-container">   
-
                 <h1 style={{textAlign: 'center'}}>log in</h1>
+                {loading? <SmallLoader/> : ''}
                 <p style={{textAlign: 'center', fontStyle: 'italic'}}>{error}</p>
                 <input className="underline-input" value={username} onChange={handleUsernameChange} type="text" placeholder="username"/>
                 <br/>

@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import faceChart1 from '../images/facechart1.png'
 import faceChart2 from '../images/facechart2.png'
 import faceChart3 from '../images/facechart3.png'
+import SmallLoader from './SmallLoader';
+
 
 export default function SignUp({ history, show, onHide, handleLogin, setCurrentUser }) {
 
@@ -11,10 +13,12 @@ export default function SignUp({ history, show, onHide, handleLogin, setCurrentU
     const [password, setPassword] = useState("")
     const [facechart, setFaceChart] = useState("")
     const [background_color, setBackgroundColor] = useState("#9c5941")
+    const [loading, setLoading] = useState(false)
 
 
     const handleSubmit = (evt) => {
       evt.preventDefault()
+      setLoading(true)
       fetch(`https://glowlist-api.herokuapp.com/users`, {
           method: "POST",
           headers: {
@@ -30,6 +34,7 @@ export default function SignUp({ history, show, onHide, handleLogin, setCurrentU
       })
       .then(resp => resp.json())
       .then(data => {
+        setLoading(false)
         if(data.token) {
             setCurrentUser(data.user)
             localStorage.setItem("token", data.token)
@@ -66,6 +71,7 @@ export default function SignUp({ history, show, onHide, handleLogin, setCurrentU
         <div className="modal-body-container">   
 
                 <h1 style={{textAlign: 'center'}}>create an account</h1>
+                {loading? <SmallLoader/> : ''}
                 {renderErrors}
                 <input className="underline-input" value={username} onChange={(e) => setUsername(e.target.value)} type="text" placeholder="username"/>
                 <br/>

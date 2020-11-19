@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Loading() {
+export default function SmallLoader() {
     return (
-    <div className="centered-container">
-        <div className="spinner">
+    <div className="small-load-container">
+        <div class="spinner-small">
             <div className="bounce1"></div>
             <div className="bounce2"></div>
             <div className="bounce3"></div>
