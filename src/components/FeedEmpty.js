@@ -6,7 +6,7 @@ export default function FeedEmpty() {
     return (
     <div className="centered-container">
         <img className="feed-jellyfish" alt="a confused cartoon jellyfish" src={jellyFish}></img>
-        <h2 className="bubble">oops, there's nothing here... why dont you<Link to='/look' className="new-look" style={{marginLeft: '5px'}}>create a look</Link></h2>
+        <h2 className="bubble">oops, there's nothing here... why don't you<Link to='/look' className="new-look" style={{marginLeft: '5px'}}>create a look</Link></h2>
     </div>
     )
 }

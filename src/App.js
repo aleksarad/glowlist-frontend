@@ -9,8 +9,8 @@ import LookForm from './components/LookForm'
 import HomePage from './components/HomePage'
 import SearchBar from './components/SearchBar'
 import Filter from './components/Filter'
-import Loading from  './components/Loading'
-import FeedEmpty from  './components/FeedEmpty'
+import Loading from './components/Loading'
+import FeedEmpty from './components/FeedEmpty'
 
 function App() {
     const [signUpShow, setSignUpModal] = useState(false);
